@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>French Drain Calculator – Gravel, Pipe & Fabric Estimates | DrainCalc</title>
+<meta name="description" content="Free french drain calculator. Enter trench length, width and depth to get exact gravel volume in cubic yards and tons, perforated pipe length and filter fabric area. No sign-up, instant results.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://draincalc.net/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "French Drain Calculator",
+  "url": "https://draincalc.net/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Calculate gravel volume, pipe length and filter fabric needed for a french drain trench.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How deep should a french drain be?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most residential french drains are dug 18 to 24 inches deep and 8 to 12 inches wide. The trench must sit below the problem area and slope continuously toward the outlet at about 1% (1 inch of drop per 8–10 feet)." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much gravel do I need for a french drain?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Gravel volume equals the trench volume minus the volume taken up by the pipe, plus roughly 30% extra for compaction and spillage. This calculator does that math for you and reports the result in cubic yards and tons." }
+    },
+    {
+      "@type": "Question",
+      "name": "What size gravel is best for a french drain?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Washed gravel between 0.5 and 1.5 inches is the standard choice. Washed stone packs well and lets water pass through freely; avoid crushed fines or pea gravel mixed with sand, which clog over time." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need filter fabric in a french drain?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Line the trench with non-woven geotextile fabric before adding gravel, or use perforated pipe with a fabric sock. Fabric prevents soil from migrating into the gravel and clogging the drain, and is the single biggest factor in how long the drain lasts." }
+    },
+    {
+      "@type": "Question",
+      "name": "What slope should a french drain have?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Aim for a 1% grade — about 1 inch of fall for every 8 to 10 feet of run. Less than that and water sits in the pipe; much more and water rushes past, which can scour the trench." }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#17242a; --muted:#5c6b73; --line:#dbe4e8; --bg:#f4f8f9;
+    --teal:#0f6e56; --teal-dk:#085041; --teal-bg:#e1f5ee;
+    --amber-bg:#faeeda; --amber:#854f0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-weight:700;font-size:19px;color:var(--teal-dk);text-decoration:none}
+  .logo span{color:var(--ink)}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+  nav a:hover{color:var(--teal)}
+  .hero{padding:44px 0 8px}
+  h1{font-size:30px;line-height:1.25;margin-bottom:10px}
+  .sub{color:var(--muted);font-size:17px;max-width:640px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin:26px 0}
+  .units{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px}
+  .units button{border:0;background:#fff;padding:8px 18px;font-size:14px;cursor:pointer;color:var(--muted)}
+  .units button.on{background:var(--teal);color:#fff;font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+  .inwrap{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .inwrap input{flex:1;border:0;padding:11px 13px;font-size:16px;min-width:0;outline:none}
+  .inwrap input:focus{background:#fbfdfd}
+  .inwrap .u{background:#f1f5f6;color:var(--muted);font-size:13px;display:flex;align-items:center;padding:0 12px;border-left:1px solid var(--line)}
+  .res{background:var(--teal-bg);border:1px solid #9fe1cb;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .res h2{font-size:15px;color:var(--teal-dk);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+  .big{font-size:34px;font-weight:700;color:var(--teal-dk);line-height:1.2}
+  .big small{font-size:16px;font-weight:400;color:var(--teal)}
+  .rows{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:560px){.rows{grid-template-columns:1fr}}
+  .row{display:flex;justify-content:space-between;border-bottom:1px dashed #b7dccd;padding:6px 0;font-size:15px}
+  .row b{font-variant-numeric:tabular-nums}
+  .hint{color:var(--muted);font-size:13px;margin-top:14px}
+  h2.sec{font-size:22px;margin:38px 0 12px}
+  h3{font-size:17px;margin:22px 0 8px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0;padding:0 18px}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;font-size:15.5px}
+  details p{padding-bottom:14px;color:#33454d;font-size:15px}
+  .formula{background:#0d1f26;color:#cde8dd;border-radius:10px;padding:16px 20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;overflow-x:auto;margin:12px 0;line-height:1.8}
+  .alert{background:var(--amber-bg);border:1px solid #f0d9ad;border-radius:10px;padding:14px 18px;font-size:14px;color:var(--amber);margin:18px 0}
+  .rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .rel a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+  .rel a:hover{border-color:var(--teal)}
+  .rel a small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+  footer nav{margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="/">Drain<span>Calc</span></a>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>French Drain Calculator</h1>
+    <p class="sub">Enter your trench size and get the exact amount of gravel (in cubic yards and tons), perforated pipe and filter fabric you need — instantly, no sign-up.</p>
+  </div>
+
+  <div class="card" id="calculator">
+    <div class="units" role="tablist">
+      <button id="uImp" class="on" onclick="setUnits('imp')">Feet / Inches</button>
+      <button id="uMet" onclick="setUnits('met')">Meters / cm</button>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label for="len">Trench length</label>
+        <div class="inwrap"><input id="len" type="number" min="0" step="any" value="40"><span class="u" id="uLen">ft</span></div>
+      </div>
+      <div>
+        <label for="wid">Trench width</label>
+        <div class="inwrap"><input id="wid" type="number" min="0" step="any" value="12"><span class="u" id="uWid">in</span></div>
+      </div>
+      <div>
+        <label for="dep">Trench depth</label>
+        <div class="inwrap"><input id="dep" type="number" min="0" step="any" value="24"><span class="u" id="uDep">in</span></div>
+      </div>
+      <div>
+        <label for="dia">Perforated pipe diameter</label>
+        <div class="inwrap"><input id="dia" type="number" min="0" step="any" value="4"><span class="u" id="uDia">in</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="res" id="results" aria-live="polite">
+    <h2>Your french drain needs</h2>
+    <div class="big" id="mainOut">– <small>cubic yards of gravel</small></div>
+    <div class="rows">
+      <div class="row"><span>Gravel (with 30% extra)</span><b id="gTon">–</b></div>
+      <div class="row"><span>Gravel volume (net)</span><b id="gNet">–</b></div>
+      <div class="row"><span>0.5 cu ft bags of gravel</span><b id="gBag">–</b></div>
+      <div class="row"><span>Perforated pipe</span><b id="pLen">–</b></div>
+      <div class="row"><span>Filter fabric (with overlap)</span><b id="fArea">–</b></div>
+      <div class="row"><span>Trench volume (total)</span><b id="tVol">–</b></div>
+    </div>
+    <p class="hint" id="buyHint"></p>
+  </div>
+
+  <h2 class="sec" id="how">How this calculator works</h2>
+  <p>A french drain is a gravel-filled trench with a perforated pipe that redirects surface and groundwater away from an area. The material estimate follows standard excavation practice:</p>
+  <div class="formula" id="formulaImp">
+trench volume  = length × (width ÷ 12) × (depth ÷ 12)   [ft³]
+pipe volume    = π × (diameter ÷ 24)² × length           [ft³]
+gravel needed  = (trench volume − pipe volume) × 1.30    [30% extra for compaction & spillage]
+cubic yards    = gravel ÷ 27
+tons           = cubic yards × 1.4   (washed stone ≈ 1.4 tons/yd³)
+fabric area    = length × (2 × depth + width) × 1.15     [15% overlap, lines both walls + bottom]
+  </div>
+  <div class="formula" id="formulaMet" style="display:none">
+trench volume  = length × (width ÷ 100) × (depth ÷ 100)   [m³]
+pipe volume    = π × (diameter ÷ 200)² × length            [m³]
+gravel needed  = (trench volume − pipe volume) × 1.30
+tons           = cubic meters × 1.5   (washed stone ≈ 1.5 t/m³)
+fabric area    = length × (2 × depth + width) × 1.15       [m², with 15% overlap]
+  </div>
+
+  <div class="alert">⚠️ Estimates only. Gravel density varies by quarry (1.3–1.5 tons per cubic yard), and every trench has irregularities. Round up when ordering, and confirm quantities with your supplier.</div>
+
+  <h3>Planning tips</h3>
+  <ul>
+    <li><b>Slope it.</b> Keep a 1% grade (1 inch drop per 8–10 ft) along the whole run — water needs somewhere to go.</li>
+    <li><b>Dig wider, not deeper.</b> A 12-inch trench with 4-inch pipe leaves a healthy gravel column on both sides of the pipe.</li>
+    <li><b>Washed gravel only.</b> 0.5–1.5 in washed stone; fines and sand will clog the system within a few seasons.</li>
+    <li><b>Wrap it.</b> Non-woven geotextile fabric (or a pipe sock) is what keeps your drain working in year ten instead of year two.</li>
+    <li><b>Call before you dig.</b> In the US dial <b>811</b> to have buried utilities marked — it's free and it's the law.</li>
+  </ul>
+
+  <h2 class="sec" id="faq">Frequently asked questions</h2>
+  <details open>
+    <summary>How deep should a french drain be?</summary>
+    <p>Most residential french drains are dug 18 to 24 inches deep and 8 to 12 inches wide. The trench must sit below the problem area and slope continuously toward the outlet at about 1% (1 inch of drop per 8–10 feet).</p>
+  </details>
+  <details>
+    <summary>How much gravel do I need for a french drain?</summary>
+    <p>Gravel volume equals the trench volume minus the volume taken up by the pipe, plus roughly 30% extra for compaction and spillage. This calculator does that math for you and reports the result in cubic yards and tons.</p>
+  </details>
+  <details>
+    <summary>What size gravel is best for a french drain?</summary>
+    <p>Washed gravel between 0.5 and 1.5 inches is the standard choice. Washed stone packs well and lets water pass through freely; avoid crushed fines or pea gravel mixed with sand, which clog over time.</p>
+  </details>
+  <details>
+    <summary>Do I need filter fabric in a french drain?</summary>
+    <p>Yes. Line the trench with non-woven geotextile fabric before adding gravel, or use perforated pipe with a fabric sock. Fabric prevents soil from migrating into the gravel and clogging the drain, and is the single biggest factor in how long the drain lasts.</p>
+  </details>
+  <details>
+    <summary>What slope should a french drain have?</summary>
+    <p>Aim for a 1% grade — about 1 inch of fall for every 8 to 10 feet of run. Less than that and water sits in the pipe; much more and water rushes past, which can scour the trench.</p>
+  </details>
+
+  <h2 class="sec">More drainage calculators</h2>
+  <div class="rel">
+    <a href="#">Gravel Calculator for French Drain<small>Tons &amp; yards by trench size</small></a>
+    <a href="#">Pipe Slope Calculator<span style="display:none"></span><small>Grade, drop and fall per foot</small></a>
+    <a href="#">Dry Well Sizing Calculator<small>Volume for roof runoff</small></a>
+    <a href="#">Catch Basin Calculator<small>Grate size and basin count</small></a>
+  </div>
+
+  <footer>
+    <nav><a href="#calculator">Calculator</a> · <a href="#how">How It Works</a> · <a href="#faq">FAQ</a></nav>
+    <p>DrainCalc provides free drainage and landscaping calculators for homeowners and contractors. Results are estimates for planning purposes only — always verify with your supplier and local codes before you dig.</p>
+    <p>© 2026 DrainCalc · Last updated October 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var units = 'imp';
+  var $ = function(id){ return document.getElementById(id); };
+  var F = { len:$('len'), wid:$('wid'), dep:$('dep'), dia:$('dia') };
+  var fmt = function(n, d){ return n.toLocaleString('en-US',{maximumFractionDigits:d==null?2:d}); };
+
+  window.setUnits = function(u){
+    units = u;
+    $('uImp').classList.toggle('on', u==='imp');
+    $('uMet').classList.toggle('on', u==='met');
+    var imp = u==='imp';
+    $('uLen').textContent = imp?'ft':'m';
+    $('uWid').textContent = imp?'in':'cm';
+    $('uDep').textContent = imp?'in':'cm';
+    $('uDia').textContent = imp?'in':'cm';
+    $('formulaImp').style.display = imp?'block':'none';
+    $('formulaMet').style.display = imp?'none':'block';
+    if(imp){ F.len.value=40; F.wid.value=12; F.dep.value=24; F.dia.value=4; }
+    else { F.len.value=12; F.wid.value=30; F.dep.value=60; F.dia.value=10; }
+    calc();
+  };
+
+  function calc(){
+    var L=parseFloat(F.len.value)||0, W=parseFloat(F.wid.value)||0,
+        D=parseFloat(F.dep.value)||0, d=parseFloat(F.dia.value)||0;
+    if(L<=0||W<=0||D<=0){ setDash(); return; }
+    var imp = units==='imp';
+    var trenchVol, pipeVol, gravel, yards, tons, bags, fabric, pipeLen, mainHtml, netLabel, tonLabel, bagLabel, fabLabel, pipeLabel, volLabel;
+    if(imp){
+      var Wft=W/12, Dft=D/12;
+      trenchVol = L*Wft*Dft;
+      pipeVol   = Math.PI*Math.pow(d/24,2)*L;
+      gravel    = Math.max(0,(trenchVol-pipeVol))*1.30;
+      yards     = gravel/27;
+      tons      = yards*1.4;
+      bags      = Math.ceil(gravel/0.5);
+      fabric    = L*(2*Dft+Wft)*1.15;
+      pipeLen   = L;
+      mainHtml  = fmt(yards)+' <small>cubic yards of gravel</small>';
+      netLabel  = fmt(gravel)+' ft³'; tonLabel=fmt(tons)+' tons';
+      bagLabel  = bags+' bags'; pipeLabel=fmt(pipeLen)+' ft (4 in perf.)';
+      fabLabel  = fmt(fabric)+' ft²'; volLabel=fmt(trenchVol)+' ft³';
+      $('buyHint').textContent = '≈ '+fmt(Math.ceil(tons))+' tons ordered — most suppliers sell washed stone by the ton or cubic yard.';
+    } else {
+      var Wm=W/100, Dm=D/100;
+      trenchVol = L*Wm*Dm;
+      pipeVol   = Math.PI*Math.pow(d/200,2)*L;
+      gravel    = Math.max(0,(trenchVol-pipeVol))*1.30;
+      tons      = gravel*1.5;
+      fabric    = L*(2*Dm+Wm)*1.15;
+      pipeLen   = L;
+      mainHtml  = fmt(gravel)+' <small>m³ of gravel (≈ '+fmt(tons)+' t)</small>';
+      netLabel  = fmt(gravel)+' m³'; tonLabel=fmt(tons)+' metric tons';
+      bagLabel  = '—'; pipeLabel=fmt(pipeLen)+' m (100 mm perf.)';
+      fabLabel  = fmt(fabric)+' m²'; volLabel=fmt(trenchVol)+' m³';
+      $('buyHint').textContent = '≈ '+fmt(Math.ceil(tons))+' metric tons ordered — confirm density with your supplier.';
+      $('gBag').parentElement.style.display='none';
+    }
+    if(imp){ $('gBag').parentElement.style.display=''; }
+    $('mainOut').innerHTML = mainHtml;
+    $('gNet').textContent = netLabel;
+    $('gTon').textContent = tonLabel;
+    $('gBag').textContent = bagLabel;
+    $('pLen').textContent = pipeLabel;
+    $('fArea').textContent = fabLabel;
+    $('tVol').textContent = volLabel;
+  }
+  function setDash(){
+    ['gTon','gNet','gBag','pLen','fArea','tVol'].forEach(function(id){ $(id).textContent='–'; });
+    $('mainOut').innerHTML = '– <small>enter trench dimensions</small>';
+  }
+  Object.keys(F).forEach(function(k){ F[k].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
