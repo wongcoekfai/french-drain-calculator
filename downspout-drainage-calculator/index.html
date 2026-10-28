@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Downspout Drainage Calculator – Roof Runoff & Downspout Size | DrainCalc</title>
+<meta name="description" content="Free downspout drainage calculator. Enter roof area and rainfall intensity to get runoff in GPM, check 2x3 vs 3x4 downspout capacity, and see gallons routed to your drain. No sign-up.">
+<meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rh92qWJRqgHoNxDhyYulN0ytVPWbeSl17NSdC9YY7rI" />
+<link rel="canonical" href="https://tools.slidevaulte.com/downspout-drainage-calculator/">
+<meta property="og:title" content="Downspout Drainage Calculator – Roof Runoff & Downspout Size">
+<meta property="og:description" content="Calculate roof runoff in gallons per minute, size your downspouts (2x3 vs 3x4 vs round), and see where the water should go. Free, instant, no sign-up.">
+<meta property="og:url" content="https://tools.slidevaulte.com/downspout-drainage-calculator/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Downspout Drainage Calculator",
+  "url": "https://tools.slidevaulte.com/downspout-drainage-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Calculate roof runoff per downspout in GPM, verify downspout capacity, and plan drainage routing.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many downspouts do I need per gutter?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A common rule is one 2x3 downspout for every 30 to 40 feet of gutter, but the honest answer depends on roof area and local rainfall. A 2x3 downspout handles roughly 500 to 700 square feet of roof in moderate climates; in heavy-rain regions you need a 3x4 downspout or more of them. This calculator sizes it from your actual roof area and design rainfall." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between a 2x3 and 3x4 downspout?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A 3x4 downspout has roughly double the capacity of a 2x3 (about 45 GPM versus 23 GPM at full flow) and clogs far less often because leaves pass through the larger opening. If your calculator result is marginal on a 2x3, upsizing to 3x4 is cheap insurance compared with adding another downspout." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much rain can a downspout handle?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Approximate full-flow capacities: a 2x3 inch rectangular downspout moves about 23 GPM, a 3x4 inch about 46 GPM, and a 4-inch round about 55 GPM. Real-world capacity drops if the run has elbows or partial clogs, so size with some headroom rather than at the exact limit." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where should downspout water go?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ideally at least 6 to 10 feet away from the foundation, on ground that slopes away from the house. Options in order of effort: splash blocks, above-ground extension pipes, buried corrugated or PVC pipe to a dry well, or a tie-in to a French drain. Dumping water at the foundation is the leading cause of basement moisture and foundation settling." }
+    },
+    {
+      "@type": "Question",
+      "name": "What rainfall intensity should I use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use your region's 10-minute storm intensity at roughly the 10-year return period: about 2 to 3 inches per hour in much of the northern US, 4 to 5 in the Midwest and mid-Atlantic, and 6 to 8 in the Gulf Coast. Your local building code or the NOAA Atlas 14 data gives the exact figure — the default of 4 in/hr is a sensible middle ground for most of the country." }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#17242a; --muted:#5c6b73; --line:#dbe4e8; --bg:#f4f8f9;
+    --teal:#0f6e56; --teal-dk:#085041; --teal-bg:#e1f5ee;
+    --amber-bg:#faeeda; --amber:#854f0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-weight:700;font-size:19px;color:var(--teal-dk);text-decoration:none}
+  .logo span{color:var(--ink)}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+  nav a:hover{color:var(--teal)}
+  .hero{padding:44px 0 8px}
+  h1{font-size:30px;line-height:1.25;margin-bottom:10px}
+  .sub{color:var(--muted);font-size:17px;max-width:640px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin:26px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+  .inwrap{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .inwrap input{flex:1;border:0;padding:11px 13px;font-size:16px;min-width:0;outline:none}
+  .inwrap input:focus{background:#fbfdfd}
+  .inwrap .u{background:#f1f5f6;color:var(--muted);font-size:13px;display:flex;align-items:center;padding:0 12px;border-left:1px solid var(--line)}
+  .inwrap select{flex:1;border:0;padding:11px 13px;font-size:15px;outline:none;background:#fff}
+  .res{background:var(--teal-bg);border:1px solid #9fe1cb;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .res h2{font-size:15px;color:var(--teal-dk);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+  .big{font-size:34px;font-weight:700;color:var(--teal-dk);line-height:1.2}
+  .big small{font-size:16px;font-weight:400;color:var(--teal)}
+  .rows{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:560px){.rows{grid-template-columns:1fr}}
+  .row{display:flex;justify-content:space-between;border-bottom:1px dashed #b7dccd;padding:6px 0;font-size:15px}
+  .row b{font-variant-numeric:tabular-nums}
+  .verdict{margin-top:16px;padding:12px 16px;border-radius:10px;font-weight:600;font-size:15px}
+  .v-ok{background:#d8f3e6;color:#0b5c3b}
+  .v-bad{background:var(--amber-bg);color:var(--amber)}
+  .hint{color:var(--muted);font-size:13px;margin-top:14px}
+  h2.sec{font-size:22px;margin:38px 0 12px}
+  h3{font-size:17px;margin:22px 0 8px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0;padding:0 18px}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;font-size:15.5px}
+  details p{padding-bottom:14px;color:#33454d;font-size:15px}
+  .formula{background:#0d1f26;color:#cde8dd;border-radius:10px;padding:16px 20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;overflow-x:auto;margin:12px 0;line-height:1.8}
+  .alert{background:var(--amber-bg);border:1px solid #f0d9ad;border-radius:10px;padding:14px 18px;font-size:14px;color:var(--amber);margin:18px 0}
+  .rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .rel a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+  .rel a:hover{border-color:var(--teal)}
+  .rel a small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+  footer nav{margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="/">Drain<span>Calc</span></a>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Downspout Drainage Calculator</h1>
+    <p class="sub">Enter your roof area and local storm intensity to see how many gallons per minute each downspout must carry — and whether a 2×3 downspout is enough or you need to upsize.</p>
+  </div>
+
+  <div class="card" id="calculator">
+    <div class="grid">
+      <div>
+        <label for="area">Roof area draining to one downspout</label>
+        <div class="inwrap"><input id="area" type="number" min="0" step="any" value="600"><span class="u">ft²</span></div>
+      </div>
+      <div>
+        <label for="rain">Design rainfall intensity</label>
+        <div class="inwrap"><input id="rain" type="number" min="0" step="any" value="4"><span class="u">in/hr</span></div>
+      </div>
+      <div>
+        <label for="count">Number of downspouts (whole house)</label>
+        <div class="inwrap"><input id="count" type="number" min="0" step="1" value="4"><span class="u">pcs</span></div>
+      </div>
+      <div>
+        <label for="size">Downspout size</label>
+        <div class="inwrap">
+          <select id="size">
+            <option value="23" selected>2 × 3 in rectangular (~23 GPM)</option>
+            <option value="46">3 × 4 in rectangular (~46 GPM)</option>
+            <option value="55">4 in round (~55 GPM)</option>
+            <option value="0">Custom capacity…</option>
+          </select>
+        </div>
+      </div>
+      <div id="customWrap" style="display:none">
+        <label for="cap">Custom downspout capacity</label>
+        <div class="inwrap"><input id="cap" type="number" min="0" step="any" value="30"><span class="u">GPM</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="res" id="results" aria-live="polite">
+    <h2>Runoff per downspout</h2>
+    <div class="big" id="mainOut">– <small>GPM at peak</small></div>
+    <div class="rows">
+      <div class="row"><span>Per downspout</span><b id="rEach">–</b></div>
+      <div class="row"><span>Whole roof (all downspouts)</span><b id="rTotal">–</b></div>
+      <div class="row"><span>Gallons per hour, per downspout</span><b id="rGalHr">–</b></div>
+      <div class="row"><span>Downspout capacity</span><b id="rCap">–</b></div>
+      <div class="row"><span>Headroom</span><b id="rHead">–</b></div>
+      <div class="row"><span>Water routed in a 1-hour storm (whole house)</span><b id="rStorm">–</b></div>
+    </div>
+    <div class="verdict v-ok" id="verdict">Enter roof area and rainfall to check your downspout.</div>
+    <p class="hint" id="routeHint"></p>
+  </div>
+
+  <h2 class="sec" id="how">How this calculator works</h2>
+  <p>The math is the same rational-method runoff used for gutter and drain sizing:</p>
+  <div class="formula">
+runoff (GPM) = 0.0104 × roof area (ft²) × rainfall intensity (in/hr)
+  </div>
+  <p>One square foot of roof sheds about 0.62 gallons per hour for every inch of rainfall — multiply by your design storm intensity and the contributing roof area. The downspout capacity figures are approximate full-flow values from gutter manufacturer data; elbows, screens and partial clogs reduce them, so keep at least 25% headroom.</p>
+
+  <div class="alert">⚠️ Estimates only. Capacity figures assume straight, clean downspouts at full flow. If your result is within 25% of the limit, upsize the downspout or add another — overflowing gutters dump water against the foundation, which is far more expensive to fix than a bigger downspout.</div>
+
+  <h3>Routing the water away</h3>
+  <ul>
+    <li><b>Minimum 6–10 ft from the foundation,</b> discharging onto ground that slopes away from the house.</li>
+    <li><b>Splash blocks</b> for small roofs and sandy soil; <b>buried pipe to a dry well</b> where soil drains slowly.</li>
+    <li><b>Tie into a French drain</b> with a solid pipe — use our <a href="/pipe-slope-calculator/">pipe slope calculator</a> to keep it moving (1/8 to 1/4 inch per foot).</li>
+    <li><b>Size the receiving drain</b> with the <a href="/dry-well-calculator/">dry well calculator</a> — one hour of the storm volumes above is the number to store.</li>
+  </ul>
+
+  <h2 class="sec" id="faq">Frequently asked questions</h2>
+  <details open>
+    <summary>How many downspouts do I need per gutter?</summary>
+    <p>A common rule is one 2×3 downspout for every 30 to 40 feet of gutter, but the honest answer depends on roof area and local rainfall. A 2×3 downspout handles roughly 500 to 700 square feet of roof in moderate climates; in heavy-rain regions you need a 3×4 downspout or more of them. This calculator sizes it from your actual roof area and design rainfall.</p>
+  </details>
+  <details>
+    <summary>What is the difference between a 2×3 and 3×4 downspout?</summary>
+    <p>A 3×4 downspout has roughly double the capacity of a 2×3 (about 45 GPM versus 23 GPM at full flow) and clogs far less often because leaves pass through the larger opening. If your calculator result is marginal on a 2×3, upsizing to 3×4 is cheap insurance compared with adding another downspout.</p>
+  </details>
+  <details>
+    <summary>How much rain can a downspout handle?</summary>
+    <p>Approximate full-flow capacities: a 2×3 inch rectangular downspout moves about 23 GPM, a 3×4 inch about 46 GPM, and a 4-inch round about 55 GPM. Real-world capacity drops if the run has elbows or partial clogs, so size with some headroom rather than at the exact limit.</p>
+  </details>
+  <details>
+    <summary>Where should downspout water go?</summary>
+    <p>Ideally at least 6 to 10 feet away from the foundation, on ground that slopes away from the house. Options in order of effort: splash blocks, above-ground extension pipes, buried corrugated or PVC pipe to a dry well, or a tie-in to a French drain. Dumping water at the foundation is the leading cause of basement moisture and foundation settling.</p>
+  </details>
+  <details>
+    <summary>What rainfall intensity should I use?</summary>
+    <p>Use your region's 10-minute storm intensity at roughly the 10-year return period: about 2 to 3 inches per hour in much of the northern US, 4 to 5 in the Midwest and mid-Atlantic, and 6 to 8 in the Gulf Coast. Your local building code or the NOAA Atlas 14 data gives the exact figure — the default of 4 in/hr is a sensible middle ground for most of the country.</p>
+  </details>
+
+  <h2 class="sec">Related calculators</h2>
+  <div class="rel">
+    <a href="/">French Drain Calculator<small>Gravel, pipe &amp; fabric by trench size</small></a>
+    <a href="/dry-well-calculator/">Dry Well Calculator<small>Size &amp; volume for roof runoff</small></a>
+    <a href="/catch-basin-calculator/">Catch Basin Calculator<small>Peak flow and basin count</small></a>
+    <a href="/pipe-slope-calculator/">Pipe Slope Calculator<small>Grade, drop and fall per foot</small></a>
+    <a href="/gravel-calculator/">Gravel Calculator<small>Tons &amp; yards by area and depth</small></a>
+    <a href="/mulch-calculator/">Mulch Calculator<small>Bags, cubic yards &amp; cost</small></a>
+  </div>
+
+  <footer>
+    <nav><a href="#calculator">Calculator</a> · <a href="#how">How It Works</a> · <a href="#faq">FAQ</a></nav>
+    <p>DrainCalc provides free drainage and landscaping calculators for homeowners and contractors. Results are estimates for planning purposes only — always verify with your supplier and local codes before you dig.</p>
+    <p>© 2026 DrainCalc · Last updated October 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var F = { area:$('area'), rain:$('rain'), count:$('count'), size:$('size'), cap:$('cap') };
+  var fmt = function(n, d){ return n.toLocaleString('en-US',{maximumFractionDigits:d==null?2:d}); };
+
+  F.size.addEventListener('change', function(){
+    $('customWrap').style.display = F.size.value==='0' ? 'block' : 'none';
+    calc();
+  });
+
+  function capacity(){
+    if(F.size.value==='0') return parseFloat(F.cap.value)||0;
+    return parseFloat(F.size.value);
+  }
+
+  function calc(){
+    var A=parseFloat(F.area.value)||0, I=parseFloat(F.rain.value)||0,
+        N=parseInt(F.count.value,10)||0, C=capacity();
+    if(A<=0||I<=0){ setDash(); return; }
+    var qEach = 0.0104*A*I;
+    $('mainOut').innerHTML = fmt(qEach)+' <small>GPM at peak</small>';
+    $('rEach').textContent = fmt(qEach)+' GPM';
+    $('rTotal').textContent = N>0 ? fmt(qEach*N)+' GPM' : '–';
+    $('rGalHr').textContent = fmt(qEach*60,0)+' gal/hr';
+    if(C>0){
+      $('rCap').textContent = fmt(C)+' GPM';
+      var ratio = qEach/C;
+      $('rHead').textContent = ratio<1 ? fmt((C-qEach),1)+' GPM spare' : fmt((qEach-C),1)+' GPM over';
+      var v = $('verdict');
+      if(ratio<0.75){
+        v.className='verdict v-ok';
+        v.textContent='✓ '+F.size.options[F.size.selectedIndex].text.split(' (')[0]+' is adequate — '+fmt(ratio*100,0)+'% of capacity used.';
+        $('routeHint').textContent = 'Good headroom. Route water at least 6–10 ft from the foundation; see routing tips below.';
+      } else if(ratio<1){
+        v.className='verdict v-bad';
+        v.textContent='⚠ Marginal — '+fmt(ratio*100,0)+'% of capacity. Upsize the downspout or add another; clogs and elbows eat the difference.';
+        $('routeHint').textContent = 'A 3×4 downspout doubles capacity — usually cheaper than adding a second run.';
+      } else {
+        v.className='verdict v-bad';
+        v.textContent='✗ Undersized — this downspout will overflow at the design storm. Use a larger size or split the roof area across more downspouts.';
+        $('routeHint').textContent = 'Splitting the area between more downspouts, or upsizing to 3×4, fixes the overflow.';
+      }
+    } else {
+      $('rCap').textContent='–'; $('rHead').textContent='–';
+      $('verdict').className='verdict v-ok';
+      $('verdict').textContent='Select a downspout size to check capacity.';
+      $('routeHint').textContent='';
+    }
+    $('rStorm').textContent = N>0 ? fmt(qEach*N*60,0)+' gal' : '–';
+  }
+  function setDash(){
+    ['rEach','rTotal','rGalHr','rCap','rHead','rStorm'].forEach(function(id){ $(id).textContent='–'; });
+    $('mainOut').innerHTML = '– <small>enter roof area and rainfall</small>';
+    $('verdict').textContent='Enter roof area and rainfall to check your downspout.';
+    $('routeHint').textContent='';
+  }
+  Object.keys(F).forEach(function(k){ F[k].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "75e83c45a3934dc2b73e7e85c0a0120f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
