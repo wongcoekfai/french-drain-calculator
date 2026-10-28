@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yard Grading Calculator – Fill Dirt for Regrading | DrainCalc</title>
+<meta name="description" content="Free yard grading calculator. Enter your yard size and current slope to get the fill dirt needed in cubic yards and tons to reach the 6-inch-per-10-feet drainage slope. No sign-up.">
+<meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rh92qWJRqgHoNxDhyYulN0ytVPWbeSl17NSdC9YY7rI" />
+<link rel="canonical" href="https://tools.slidevaulte.com/yard-grading-calculator/">
+<meta property="og:title" content="Yard Grading Calculator – Fill Dirt for Regrading">
+<meta property="og:description" content="Calculate how much fill dirt you need to regrade your yard for proper drainage — cubic yards, tons, and the slope you should aim for. Free and instant.">
+<meta property="og:url" content="https://tools.slidevaulte.com/yard-grading-calculator/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Yard Grading Calculator",
+  "url": "https://tools.slidevaulte.com/yard-grading-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Calculate fill dirt volume in cubic yards and tons needed to regrade a yard to a proper drainage slope.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much slope should a yard have for drainage?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The widely used guideline is 6 inches of drop over the first 10 feet from the house — roughly a 5 percent grade. Beyond that first zone, a gentler 1 to 2 percent slope carries water away without creating an obvious hill. Flat spots that hold water after rain are the ones worth regrading." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does fill dirt cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Bulk fill dirt typically runs 8 to 20 dollars per cubic yard delivered, depending on distance and whether it is screened. Topsoil for the final 2 to 4 inch layer costs more, roughly 15 to 40 dollars per yard. Small projects under about 3 yards are often cheaper with bagged soil from a home center." }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use fill dirt or topsoil for regrading?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Both: fill dirt (subsoil, low organic content) for the bulk of the grade because it compacts and stays put, then 2 to 4 inches of topsoil on top for grass. Fill dirt alone grows a poor lawn, and topsoil alone compacts and settles over time. Roughly, order fill dirt for 80 percent of the volume and topsoil for the rest." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I add soil right against my foundation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Only up to a point: keep the finished grade at least 4 to 6 inches below the siding, brick, or sill plate. Soil piled against siding invites rot, termites and moisture wicking into the wall. The goal is soil sloping away from a visibly exposed foundation edge, not burying it." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to compact fill dirt when regrading?",
+      "acceptedAnswer": { "@type": "Answer", "text": "For shallow regrades under about 6 inches, light raking and settling with water is usually enough. For deeper fills, compact in lifts of 4 to 6 inches with a plate compactor, or order about 15 percent extra to allow for natural settling — this calculator already includes that allowance." }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#17242a; --muted:#5c6b73; --line:#dbe4e8; --bg:#f4f8f9;
+    --teal:#0f6e56; --teal-dk:#085041; --teal-bg:#e1f5ee;
+    --amber-bg:#faeeda; --amber:#854f0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-weight:700;font-size:19px;color:var(--teal-dk);text-decoration:none}
+  .logo span{color:var(--ink)}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+  nav a:hover{color:var(--teal)}
+  .hero{padding:44px 0 8px}
+  h1{font-size:30px;line-height:1.25;margin-bottom:10px}
+  .sub{color:var(--muted);font-size:17px;max-width:640px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin:26px 0}
+  .units{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px}
+  .units button{border:0;background:#fff;padding:8px 18px;font-size:14px;cursor:pointer;color:var(--muted)}
+  .units button.on{background:var(--teal);color:#fff;font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+  .inwrap{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .inwrap input{flex:1;border:0;padding:11px 13px;font-size:16px;min-width:0;outline:none}
+  .inwrap input:focus{background:#fbfdfd}
+  .inwrap .u{background:#f1f5f6;color:var(--muted);font-size:13px;display:flex;align-items:center;padding:0 12px;border-left:1px solid var(--line)}
+  .res{background:var(--teal-bg);border:1px solid #9fe1cb;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .res h2{font-size:15px;color:var(--teal-dk);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+  .big{font-size:34px;font-weight:700;color:var(--teal-dk);line-height:1.2}
+  .big small{font-size:16px;font-weight:400;color:var(--teal)}
+  .rows{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:560px){.rows{grid-template-columns:1fr}}
+  .row{display:flex;justify-content:space-between;border-bottom:1px dashed #b7dccd;padding:6px 0;font-size:15px}
+  .row b{font-variant-numeric:tabular-nums}
+  .hint{color:var(--muted);font-size:13px;margin-top:14px}
+  h2.sec{font-size:22px;margin:38px 0 12px}
+  h3{font-size:17px;margin:22px 0 8px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0;padding:0 18px}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;font-size:15.5px}
+  details p{padding-bottom:14px;color:#33454d;font-size:15px}
+  .formula{background:#0d1f26;color:#cde8dd;border-radius:10px;padding:16px 20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;overflow-x:auto;margin:12px 0;line-height:1.8}
+  .alert{background:var(--amber-bg);border:1px solid #f0d9ad;border-radius:10px;padding:14px 18px;font-size:14px;color:var(--amber);margin:18px 0}
+  .rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .rel a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+  .rel a:hover{border-color:var(--teal)}
+  .rel a small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+  footer nav{margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="/">Drain<span>Calc</span></a>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Yard Grading Calculator</h1>
+    <p class="sub">Find out how much fill dirt it takes to regrade your yard so water flows away from the house — in cubic yards and tons, with settling allowance included.</p>
+  </div>
+
+  <div class="card" id="calculator">
+    <div class="units" role="tablist">
+      <button id="uImp" class="on" onclick="setUnits('imp')">Feet / Inches</button>
+      <button id="uMet" onclick="setUnits('met')">Meters / cm</button>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label for="len">Width of the low area (along the house)</label>
+        <div class="inwrap"><input id="len" type="number" min="0" step="any" value="30"><span class="u" id="uLen">ft</span></div>
+      </div>
+      <div>
+        <label for="wid">Distance out from the house</label>
+        <div class="inwrap"><input id="wid" type="number" min="0" step="any" value="10"><span class="u" id="uWid">ft</span></div>
+      </div>
+      <div>
+        <label for="cur">Current drop over that distance</label>
+        <div class="inwrap"><input id="cur" type="number" min="0" step="any" value="0"><span class="u" id="uCur">in</span></div>
+      </div>
+      <div>
+        <label for="tgt">Target drop over that distance</label>
+        <div class="inwrap"><input id="tgt" type="number" min="0" step="any" value="6"><span class="u" id="uTgt">in</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="res" id="results" aria-live="polite">
+    <h2>Fill dirt needed</h2>
+    <div class="big" id="mainOut">– <small>cubic yards of fill</small></div>
+    <div class="rows">
+      <div class="row"><span>Extra drop to build</span><b id="rDrop">–</b></div>
+      <div class="row"><span>Final slope</span><b id="rSlope">–</b></div>
+      <div class="row"><span>Net wedge volume</span><b id="rNet">–</b></div>
+      <div class="row"><span>With 15% settling allowance</span><b id="rOrder">–</b></div>
+      <div class="row"><span>Approx. weight</span><b id="rTon">–</b></div>
+      <div class="row"><span>Topsoil cap (last 3")</span><b id="rTop">–</b></div>
+    </div>
+    <p class="hint" id="verdict"></p>
+  </div>
+
+  <h2 class="sec" id="how">How this calculator works</h2>
+  <p>Regrading builds a wedge of soil — thin at the house end, thick at the far edge:</p>
+  <div class="formula" id="formulaImp">
+extra drop (ft)  = (target − current) ÷ 12
+wedge volume     = ½ × extra drop × width × distance
+cubic yards      = volume ÷ 27 × 1.15 (settling)
+tons             = yards × 1.3
+topsoil cap      = width × distance × 0.25 ft ÷ 27
+  </div>
+  <div class="formula" id="formulaMet" style="display:none">
+extra drop (m)   = (target − current) ÷ 100
+wedge volume     = ½ × extra drop × width × distance × 1.15
+  </div>
+
+  <div class="alert">⚠️ Estimates only. Keep finished grade 4–6 inches below siding or brick. If the low spot sits far out in the yard (not against the house), split the area into strips and treat the uphill edge of each as its own start point.</div>
+
+  <h3>Regrading tips</h3>
+  <ul>
+    <li><b>Mark the target line first.</b> Stakes and string at the final height beat eyeballing — check with a line level.</li>
+    <li><b>Fill dirt for the bulk, topsoil on top.</b> Fill compacts and stays; topsoil grows grass. Order both separately.</li>
+    <li><b>Compact in lifts</b> for deep fills, or just order the 15% extra and let it settle through a season.</li>
+    <li><b>Pair with a drain for severe low spots.</b> A regrade moves surface water; a <a href="/">french drain</a> handles the water that soaks in. Check the pipe fall with the <a href="/pipe-slope-calculator/">pipe slope calculator</a>.</li>
+  </ul>
+
+  <h2 class="sec" id="faq">Frequently asked questions</h2>
+  <details open>
+    <summary>How much slope should a yard have for drainage?</summary>
+    <p>The widely used guideline is 6 inches of drop over the first 10 feet from the house — roughly a 5 percent grade. Beyond that first zone, a gentler 1 to 2 percent slope carries water away without creating an obvious hill. Flat spots that hold water after rain are the ones worth regrading.</p>
+  </details>
+  <details>
+    <summary>How much does fill dirt cost?</summary>
+    <p>Bulk fill dirt typically runs 8 to 20 dollars per cubic yard delivered, depending on distance and whether it is screened. Topsoil for the final 2 to 4 inch layer costs more, roughly 15 to 40 dollars per yard. Small projects under about 3 yards are often cheaper with bagged soil from a home center.</p>
+  </details>
+  <details>
+    <summary>Should I use fill dirt or topsoil for regrading?</summary>
+    <p>Both: fill dirt (subsoil, low organic content) for the bulk of the grade because it compacts and stays put, then 2 to 4 inches of topsoil on top for grass. Fill dirt alone grows a poor lawn, and topsoil alone compacts and settles over time. Roughly, order fill dirt for 80 percent of the volume and topsoil for the rest.</p>
+  </details>
+  <details>
+    <summary>Can I add soil right against my foundation?</summary>
+    <p>Only up to a point: keep the finished grade at least 4 to 6 inches below the siding, brick, or sill plate. Soil piled against siding invites rot, termites and moisture wicking into the wall. The goal is soil sloping away from a visibly exposed foundation edge, not burying it.</p>
+  </details>
+  <details>
+    <summary>Do I need to compact fill dirt when regrading?</summary>
+    <p>For shallow regrades under about 6 inches, light raking and settling with water is usually enough. For deeper fills, compact in lifts of 4 to 6 inches with a plate compactor, or order about 15 percent extra to allow for natural settling — this calculator already includes that allowance.</p>
+  </details>
+
+  <h2 class="sec">Related calculators</h2>
+  <div class="rel">
+    <a href="/">French Drain Calculator<small>Gravel, pipe &amp; fabric by trench size</small></a>
+    <a href="/gravel-calculator/">Gravel Calculator<small>Tons &amp; yards by area and depth</small></a>
+    <a href="/pipe-slope-calculator/">Pipe Slope Calculator<small>Grade, drop and fall per foot</small></a>
+    <a href="/dry-well-calculator/">Dry Well Calculator<small>Size &amp; volume for roof runoff</small></a>
+    <a href="/catch-basin-calculator/">Catch Basin Calculator<small>Peak flow and basin count</small></a>
+    <a href="/mulch-calculator/">Mulch Calculator<small>Bags, cubic yards &amp; cost</small></a>
+  </div>
+
+  <footer>
+    <nav><a href="#calculator">Calculator</a> · <a href="#how">How It Works</a> · <a href="#faq">FAQ</a></nav>
+    <p>DrainCalc provides free drainage and landscaping calculators for homeowners and contractors. Results are estimates for planning purposes only — always verify with your supplier and local codes before you dig.</p>
+    <p>© 2026 DrainCalc · Last updated October 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var units = 'imp';
+  var $ = function(id){ return document.getElementById(id); };
+  var F = { len:$('len'), wid:$('wid'), cur:$('cur'), tgt:$('tgt') };
+  var fmt = function(n, d){ return n.toLocaleString('en-US',{maximumFractionDigits:d==null?2:d}); };
+
+  window.setUnits = function(u){
+    units = u;
+    $('uImp').classList.toggle('on', u==='imp');
+    $('uMet').classList.toggle('on', u==='met');
+    var imp = u==='imp';
+    $('uLen').textContent = imp?'ft':'m';
+    $('uWid').textContent = imp?'ft':'m';
+    $('uCur').textContent = imp?'in':'cm';
+    $('uTgt').textContent = imp?'in':'cm';
+    $('formulaImp').style.display = imp?'block':'none';
+    $('formulaMet').style.display = imp?'none':'block';
+    if(imp){ F.len.value=30; F.wid.value=10; F.cur.value=0; F.tgt.value=6; }
+    else { F.len.value=9; F.wid.value=3; F.cur.value=0; F.tgt.value=15; }
+    calc();
+  };
+
+  function calc(){
+    var L=parseFloat(F.len.value)||0, W=parseFloat(F.wid.value)||0,
+        C=parseFloat(F.cur.value)||0, T=parseFloat(F.tgt.value)||0;
+    if(L<=0||W<=0){ setDash(); return; }
+    var imp = units==='imp';
+    var drop = Math.max(0, T-C);
+    $('rDrop').textContent = imp ? fmt(drop)+' in' : fmt(drop,1)+' cm';
+    var slope = W>0 ? (imp ? drop/12/W*100 : drop/100/W*100) : 0;
+    $('rSlope').textContent = fmt(slope,1)+'% grade';
+    if(drop<=0){
+      $('mainOut').innerHTML = '0 <small>— yard already meets the target slope</small>';
+      ['rNet','rOrder','rTon','rTop'].forEach(function(id){ $(id).textContent='–'; });
+      $('verdict').textContent = 'Current drop already meets or exceeds the target. Check for local dips instead — water ponds where the grade flattens.';
+      return;
+    }
+    var net, order, tons, top;
+    if(imp){
+      var dft = drop/12;
+      net = 0.5*dft*L*W;
+      order = net*1.15;
+      tons = order*1.3;
+      top = L*W*0.25/27;
+      $('mainOut').innerHTML = fmt(order)+' <small>cubic yards of fill dirt</small>';
+      $('rNet').textContent = fmt(net)+' yd³';
+      $('rOrder').textContent = fmt(order)+' yd³';
+      $('rTon').textContent = '≈ '+fmt(tons)+' tons';
+      $('rTop').textContent = fmt(top)+' yd³ topsoil';
+    } else {
+      var dm = drop/100;
+      net = 0.5*dm*L*W;
+      order = net*1.15;
+      top = L*W*0.075;
+      $('mainOut').innerHTML = fmt(order)+' <small>m³ of fill dirt</small>';
+      $('rNet').textContent = fmt(net)+' m³';
+      $('rOrder').textContent = fmt(order)+' m³ (incl. 15% settling)';
+      $('rTon').textContent = '≈ '+fmt(order*1.55)+' tonnes';
+      $('rTop').textContent = fmt(top)+' m³ topsoil';
+    }
+    $('verdict').textContent = imp
+      ? 'Order '+fmt(Math.ceil(order))+' yards of fill dirt, plus '+fmt(top,1)+' yards of topsoil for the grass layer.'
+      : 'Order '+fmt(order,1)+' m³ of fill dirt, plus '+fmt(top,1)+' m³ of topsoil for the grass layer.';
+  }
+  function setDash(){
+    ['rDrop','rSlope','rNet','rOrder','rTon','rTop'].forEach(function(id){ $(id).textContent='–'; });
+    $('mainOut').innerHTML = '– <small>enter yard size and slopes</small>';
+  }
+  Object.keys(F).forEach(function(k){ F[k].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "75e83c45a3934dc2b73e7e85c0a0120f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
