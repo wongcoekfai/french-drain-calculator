@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico">
+<title>Manning Pipe Flow Calculator – Capacity & Velocity | DrainCalc</title>
+<meta name="description" content="Free Manning equation pipe flow calculator. Enter pipe size, material and slope to get full-pipe capacity in gpm or l/s plus flow velocity. PVC, HDPE, concrete and more. No sign-up.">
+<meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rh92qWJRqgHoNxDhyYulN0ytVPWbeSl17NSdC9YY7rI" />
+<link rel="canonical" href="https://tools.slidevaulte.com/manning-pipe-flow-calculator/">
+<meta property="og:title" content="Manning Pipe Flow Calculator – Capacity & Velocity">
+<meta property="og:description" content="Free Manning equation calculator. Get full-pipe flow capacity and velocity from pipe size, material and slope. No sign-up, instant results.">
+<meta property="og:url" content="https://tools.slidevaulte.com/manning-pipe-flow-calculator/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Manning Pipe Flow Calculator",
+  "url": "https://tools.slidevaulte.com/manning-pipe-flow-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Calculate full-pipe flow capacity and velocity with the Manning equation from pipe diameter, material roughness and slope.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Manning equation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Manning equation estimates flow in open channels and partially or full pipes using gravity: Q = (1.486/n) × A × R^(2/3) × S^(1/2) in US units, where Q is flow, n is the roughness coefficient, A is cross-sectional area, R is hydraulic radius (D/4 for a full circular pipe) and S is slope. It is the standard method for sizing storm drains, culverts and sewer lines." }
+    },
+    {
+      "@type": "Question",
+      "name": "What Manning's n value should I use?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Typical values: PVC and HDPE with smooth interior 0.009–0.012, concrete pipe 0.013, vitrified clay 0.013, corrugated steel 0.024. Smoother pipe carries noticeably more water at the same slope — a PVC pipe at n = 0.009 flows about 40% more than corrugated steel at n = 0.024." }
+    },
+    {
+      "@type": "Question",
+      "name": "What velocity should a drainage pipe have?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Aim for at least 2 ft/s (0.6 m/s) so the flow keeps itself clean of sediment, and below about 10 ft/s (3 m/s) to avoid erosion and noise at outlets. Storm drains are usually designed for 3–6 ft/s." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much water can a 4 inch pipe carry?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A 4 inch PVC pipe at 1% slope carries roughly 55 gpm at full flow with a velocity of about 1.6 ft/s. At the standard 2% slope the same pipe carries about 77 gpm. Smoothness, slope and diameter all matter — use the calculator for your exact combination." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is full-pipe capacity the real flow?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Gravity pipes rarely run full. Maximum discharge in a circular pipe actually occurs at about 94% of the diameter, giving roughly 8% more flow than the full-pipe figure. This calculator reports the conservative full-flow capacity, which is the standard design value." }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#17242a; --muted:#5c6b73; --line:#dbe4e8; --bg:#f4f8f9;
+    --teal:#0f6e56; --teal-dk:#085041; --teal-bg:#e1f5ee;
+    --amber-bg:#faeeda; --amber:#854f0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-weight:700;font-size:19px;color:var(--teal-dk);text-decoration:none}
+  .logo span{color:var(--ink)}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+  nav a:hover{color:var(--teal)}
+  .hero{padding:44px 0 8px}
+  h1{font-size:30px;line-height:1.25;margin-bottom:10px}
+  .sub{color:var(--muted);font-size:17px;max-width:640px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin:26px 0}
+  .units{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px}
+  .units button{border:0;background:#fff;padding:8px 18px;font-size:14px;cursor:pointer;color:var(--muted)}
+  .units button.on{background:var(--teal);color:#fff;font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+  .inwrap{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .inwrap input,.inwrap select{flex:1;border:0;padding:11px 13px;font-size:16px;min-width:0;outline:none;background:#fff}
+  .inwrap input:focus,.inwrap select:focus{background:#fbfdfd}
+  .inwrap .u{background:#f1f5f6;color:var(--muted);font-size:13px;display:flex;align-items:center;padding:0 12px;border-left:1px solid var(--line)}
+  .res{background:var(--teal-bg);border:1px solid #9fe1cb;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .res h2{font-size:15px;color:var(--teal-dk);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+  .big{font-size:34px;font-weight:700;color:var(--teal-dk);line-height:1.2}
+  .big small{font-size:16px;font-weight:400;color:var(--teal)}
+  .rows{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:560px){.rows{grid-template-columns:1fr}}
+  .row{display:flex;justify-content:space-between;border-bottom:1px dashed #b7dccd;padding:6px 0;font-size:15px}
+  .row b{font-variant-numeric:tabular-nums}
+  .hint{color:var(--muted);font-size:13px;margin-top:14px}
+  h2.sec{font-size:22px;margin:38px 0 12px}
+  h3{font-size:17px;margin:22px 0 8px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0;padding:0 18px}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;font-size:15.5px}
+  details p{padding-bottom:14px;color:#33454d;font-size:15px}
+  .formula{background:#0d1f26;color:#cde8dd;border-radius:10px;padding:16px 20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;overflow-x:auto;margin:12px 0;line-height:1.8}
+  .alert{background:var(--amber-bg);border:1px solid #f0d9ad;border-radius:10px;padding:14px 18px;font-size:14px;color:var(--amber);margin:18px 0}
+  .rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .rel a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+  .rel a:hover{border-color:var(--teal)}
+  .rel a small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+  footer nav{margin-bottom:10px}
+  .visual{background:#0d1f26;border-radius:10px;padding:10px 16px 0;margin:12px 0}
+  .visual svg{display:block;width:100%;height:auto}
+  table.n{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px;background:#fff;border-radius:10px;overflow:hidden}
+  table.n th,table.n td{border:1px solid var(--line);padding:8px 12px;text-align:left}
+  table.n th{background:#eef4f5;color:var(--teal-dk)}
+  table.n td:first-child{font-weight:600}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="/">Drain<span>Calc</span></a>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Manning Pipe Flow Calculator</h1>
+    <p class="sub">Enter the pipe size, material and slope to get full-pipe flow capacity and velocity with the Manning equation — the standard method for storm drains, culverts and sewer lines.</p>
+  </div>
+
+  <div class="card" id="calculator">
+    <div class="units" role="tablist">
+      <button id="uImp" class="on" onclick="setUnits('imp')">Feet / Gallons</button>
+      <button id="uMet" onclick="setUnits('met')">Metric / Liters</button>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label for="dia">Pipe diameter</label>
+        <div class="inwrap">
+          <select id="dia">
+            <option value="4">4 in (100 mm)</option>
+            <option value="6" selected>6 in (150 mm)</option>
+            <option value="8">8 in (200 mm)</option>
+            <option value="10">10 in (250 mm)</option>
+            <option value="12">12 in (300 mm)</option>
+            <option value="15">15 in (375 mm)</option>
+            <option value="18">18 in (450 mm)</option>
+            <option value="24">24 in (600 mm)</option>
+            <option value="custom">Custom…</option>
+          </select>
+        </div>
+      </div>
+      <div id="customDiaWrap" style="display:none">
+        <label for="diaIn">Custom diameter</label>
+        <div class="inwrap"><input id="diaIn" type="number" min="0" step="any" value="5"><span class="u" id="uDia">in</span></div>
+      </div>
+      <div>
+        <label for="mat">Pipe material (Manning's n)</label>
+        <div class="inwrap">
+          <select id="mat">
+            <option value="0.009">PVC / HDPE smooth (n = 0.009)</option>
+            <option value="0.012" selected>HDPE smooth interior (n = 0.012)</option>
+            <option value="0.013">Concrete (n = 0.013)</option>
+            <option value="0.0135">Vitrified clay (n = 0.013)</option>
+            <option value="0.024">Corrugated steel (n = 0.024)</option>
+            <option value="0.035">Corrugated / very rough (n = 0.035)</option>
+            <option value="custom">Custom n…</option>
+          </select>
+        </div>
+      </div>
+      <div id="customMatWrap" style="display:none">
+        <label for="nIn">Custom Manning's n</label>
+        <div class="inwrap"><input id="nIn" type="number" min="0.005" max="0.2" step="0.001" value="0.015"><span class="u">n</span></div>
+      </div>
+      <div>
+        <label for="slope">Pipe slope</label>
+        <div class="inwrap"><input id="slope" type="number" min="0" step="any" value="1"><span class="u">%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="res" id="results" aria-live="polite">
+    <h2>Full-pipe capacity (Manning)</h2>
+    <div class="big" id="mainOut">– <small>flow capacity</small></div>
+    <div class="rows">
+      <div class="row"><span>Flow velocity</span><b id="rVel">–</b></div>
+      <div class="row"><span>Capacity (second unit)</span><b id="rAlt">–</b></div>
+      <div class="row"><span>Pipe cross-section area</span><b id="rArea">–</b></div>
+      <div class="row"><span>Hydraulic radius (D/4)</span><b id="rRad">–</b></div>
+    </div>
+    <p class="hint" id="verdict">Enter pipe size, material and slope.</p>
+  </div>
+
+  <div class="visual" aria-hidden="true">
+    <svg viewBox="0 0 680 170" xmlns="http://www.w3.org/2000/svg">
+      <line x1="30" y1="60" x2="650" y2="88" stroke="#2c4a52" stroke-width="14" stroke-linecap="round"/>
+      <line x1="30" y1="100" x2="650" y2="128" stroke="#2c4a52" stroke-width="14" stroke-linecap="round"/>
+      <path d="M30,80 Q340,86 650,108" fill="none" stroke="#3d8f7d" stroke-width="5"/>
+      <polygon points="650,108 630,98 632,112" fill="#3d8f7d"/>
+      <text x="40" y="45" fill="#7fa89b" font-size="12" font-family="sans-serif">flow direction →  velocity V = Q / A</text>
+      <text x="500" y="160" fill="#7fa89b" font-size="12" font-family="sans-serif">slope S = rise ÷ run</text>
+      <line x1="60" y1="60" x2="60" y2="90" stroke="#5c8f7d" stroke-dasharray="4 3"/>
+      <text x="70" y="82" fill="#7fa89b" font-size="11" font-family="sans-serif">drop over run = S</text>
+    </svg>
+  </div>
+
+  <h2 class="sec" id="how">How this calculator works</h2>
+  <p>This page solves the Manning equation for a circular pipe flowing full. You supply the diameter, the material (which sets the roughness coefficient <b>n</b>) and the slope; the calculator returns the capacity and the corresponding velocity:</p>
+  <div class="formula" id="formulaImp">
+US units:
+Q (cfs) = (1.486 / n) × A × R^(2/3) × S^(1/2)
+A       = π × D² / 4        (D in ft)
+R       = D / 4             (hydraulic radius, full pipe)
+S       = slope as decimal  (ft drop per ft run)
+gpm     = Q × 448.8
+V (ft/s) = Q / A
+  </div>
+  <div class="formula" id="formulaMet" style="display:none">
+SI units:
+Q (m³/s) = (1 / n) × A × R^(2/3) × S^(1/2)
+A        = π × D² / 4       (D in m)
+R        = D / 4            (hydraulic radius, full pipe)
+S        = slope as decimal (m drop per m run)
+L/s      = Q × 1000
+V (m/s)  = Q / A
+  </div>
+
+  <h3>Manning's n reference values</h3>
+  <table class="n">
+    <tr><th>Pipe material</th><th>Typical n</th><th>Notes</th></tr>
+    <tr><td>PVC (new, smooth)</td><td>0.009</td><td>Best hydraulic performance of common drain pipe</td></tr>
+    <tr><td>HDPE, smooth interior</td><td>0.012</td><td>Common corrugated-wall pipe with smooth liner</td></tr>
+    <tr><td>Concrete</td><td>0.013</td><td>Standard storm sewer value</td></tr>
+    <tr><td>Vitrified clay</td><td>0.013</td><td>Traditional sewer pipe</td></tr>
+    <tr><td>Corrugated steel</td><td>0.024</td><td>Culverts; rough walls cut capacity sharply</td></tr>
+    <tr><td>Rough / aged corrugated</td><td>0.035</td><td>Deformed or sediment-coated pipe</td></tr>
+  </table>
+
+  <div class="alert">⚠️ Full-flow capacity is the standard conservative design value — gravity pipes rarely run completely full (peak discharge actually occurs near 94% depth). Results are for planning only; verify against local stormwater design codes.</div>
+
+  <h3>Velocity check (built into the results)</h3>
+  <ul>
+    <li><b>Below 2 ft/s (0.6 m/s):</b> flow may be too slow to keep sediment moving — the pipe can silt up over time.</li>
+    <li><b>2–10 ft/s (0.6–3 m/s):</b> the healthy self-cleansing band most designs target.</li>
+    <li><b>Above 10 ft/s (3 m/s):</b> erosion risk at bends and outlets; consider flattening the slope or stepping the diameter up.</li>
+  </ul>
+
+  <h3>Design tips</h3>
+  <ul>
+    <li><b>Doubling the diameter</b> raises capacity about 5.7× (area scales with D², hydraulic radius with D) — upsizing is far more effective than steepening.</li>
+    <li><b>Slope matters less than you think:</b> capacity scales with the square root of slope, so 4× steeper only doubles the flow.</li>
+    <li><b>Material choice is real capacity:</b> at the same size and slope, smooth PVC (n = 0.009) carries ~60% more water than corrugated steel (n = 0.024).</li>
+    <li>Need the slope instead of the capacity? Use the <a href="/pipe-slope-calculator/">pipe slope calculator</a>. Sizing a basin inlet? See the <a href="/catch-basin-calculator/">catch basin calculator</a>.</li>
+  </ul>
+
+  <h2 class="sec" id="faq">Frequently asked questions</h2>
+  <details open>
+    <summary>What is the Manning equation?</summary>
+    <p>The Manning equation estimates flow in open channels and partially or full pipes using gravity: Q = (1.486/n) × A × R^(2/3) × S^(1/2) in US units, where Q is flow, n is the roughness coefficient, A is cross-sectional area, R is hydraulic radius (D/4 for a full circular pipe) and S is slope. It is the standard method for sizing storm drains, culverts and sewer lines.</p>
+  </details>
+  <details>
+    <summary>What Manning's n value should I use?</summary>
+    <p>Typical values: PVC and HDPE with smooth interior 0.009–0.012, concrete pipe 0.013, vitrified clay 0.013, corrugated steel 0.024. Smoother pipe carries noticeably more water at the same slope — a PVC pipe at n = 0.009 flows about 40% more than corrugated steel at n = 0.024.</p>
+  </details>
+  <details>
+    <summary>What velocity should a drainage pipe have?</summary>
+    <p>Aim for at least 2 ft/s (0.6 m/s) so the flow keeps itself clean of sediment, and below about 10 ft/s (3 m/s) to avoid erosion and noise at outlets. Storm drains are usually designed for 3–6 ft/s.</p>
+  </details>
+  <details>
+    <summary>How much water can a 4 inch pipe carry?</summary>
+    <p>A 4 inch PVC pipe at 1% slope carries roughly 55 gpm at full flow with a velocity of about 1.6 ft/s. At the standard 2% slope the same pipe carries about 77 gpm. Smoothness, slope and diameter all matter — use the calculator for your exact combination.</p>
+  </details>
+  <details>
+    <summary>Is full-pipe capacity the real flow?</summary>
+    <p>Gravity pipes rarely run full. Maximum discharge in a circular pipe actually occurs at about 94% of the diameter, giving roughly 8% more flow than the full-pipe figure. This calculator reports the conservative full-flow capacity, which is the standard design value.</p>
+  </details>
+
+  <h2 class="sec">Related calculators</h2>
+  <div class="rel">
+    <a href="/">French Drain Calculator<small>Gravel, pipe &amp; fabric by trench size</small></a>
+    <a href="/gravel-calculator/">Gravel Calculator<small>Tons &amp; yards by area and depth</small></a>
+    <a href="/pipe-slope-calculator/">Pipe Slope Calculator<small>Drop, grade and fall per foot</small></a>
+    <a href="/dry-well-calculator/">Dry Well Sizing Calculator<small>Volume for roof runoff</small></a>
+    <a href="/catch-basin-calculator/">Catch Basin Calculator<small>Grate size and basin count</small></a>
+    <a href="/mulch-calculator/">Mulch Calculator<small>Bags, yards and cost compared</small></a>
+    <a href="/sump-pit-calculator/">Sump Pit Calculator<small>Storage, cycles and pump sizing</small></a>
+    <a href="/downspout-drainage-calculator/">Downspout Drainage Calculator<small>Roof runoff &amp; downspout sizing</small></a>
+    <a href="/yard-grading-calculator/">Yard Grading Calculator<small>Fill dirt for regrading</small></a>
+  </div>
+
+  <footer>
+    <nav><a href="#calculator">Calculator</a> · <a href="#how">How It Works</a> · <a href="#faq">FAQ</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></nav>
+    <p>DrainCalc provides free drainage and landscaping calculators for homeowners and contractors. Results are estimates for planning purposes only — always verify with your supplier and local codes before you dig.</p>
+    <p>© 2026 DrainCalc · Last updated November 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var units = 'imp';
+  var $ = function(id){ return document.getElementById(id); };
+  var F = { dia:$('dia'), diaIn:$('diaIn'), mat:$('mat'), nIn:$('nIn'), slope:$('slope') };
+  var fmt = function(n, d){ return n.toLocaleString('en-US',{maximumFractionDigits:d==null?2:d}); };
+
+  function getDiameter(){
+    if(F.dia.value==='custom'){ return parseFloat(F.diaIn.value)||0; } // in or mm
+    var v = parseFloat(F.dia.value);
+    return units==='met' ? v*25.4 : v;
+  }
+  function getN(){
+    if(F.mat.value==='custom'){ return parseFloat(F.nIn.value)||0; }
+    return parseFloat(F.mat.value);
+  }
+
+  window.setUnits = function(u){
+    units = u;
+    $('uImp').classList.toggle('on', u==='imp');
+    $('uMet').classList.toggle('on', u==='met');
+    var imp = u==='imp';
+    $('uDia').textContent = imp?'in':'mm';
+    $('formulaImp').style.display = imp?'block':'none';
+    $('formulaMet').style.display = imp?'none':'block';
+    if(imp){ if(F.dia.value!=='custom'){ F.diaIn.value=(parseFloat(F.dia.value)||6); } else { F.diaIn.value=Math.round((parseFloat(F.diaIn.value)||152.4)/25.4*10)/10; } }
+    else { if(F.dia.value!=='custom'){ F.diaIn.value=Math.round((parseFloat(F.dia.value)||6)*25.4); } else { F.diaIn.value=Math.round((parseFloat(F.diaIn.value)||6)*25.4); } }
+    calc();
+  };
+
+  function calc(){
+    var Dimp = getDiameter();           // imp: inches, met: mm
+    var n = getN();
+    var Spct = parseFloat(F.slope.value)||0;
+    if(Dimp<=0 || n<=0 || Spct<=0){ setDash(); return; }
+    var imp = units==='imp';
+    var D  = imp ? Dimp/12 : Dimp/1000;  // ft or m
+    var A  = Math.PI*D*D/4;
+    var R  = D/4;
+    var S  = Spct/100;
+    var Q  = (imp ? 1.486/n : 1/n) * A * Math.pow(R, 2/3) * Math.sqrt(S);
+    var V  = Q/A;
+    var vMin = imp?2:0.6, vMax = imp?10:3;
+    if(imp){
+      $('mainOut').innerHTML = fmt(Q*448.831,0)+' <small>gpm ('+fmt(Q)+' cfs)</small>';
+      $('rVel').textContent = fmt(V)+' ft/s';
+      $('rAlt').textContent = fmt(Q)+' cfs';
+      $('rArea').textContent = fmt(A*144)+' sq in';
+      $('rRad').textContent = fmt(R*12,1)+' in';
+    } else {
+      $('mainOut').innerHTML = fmt(Q*1000)+' <small>L/s ('+fmt(Q,3)+' m³/s)</small>';
+      $('rVel').textContent = fmt(V)+' m/s';
+      $('rAlt').textContent = fmt(Q,3)+' m³/s';
+      $('rArea').textContent = fmt(A*10000,0)+' cm²';
+      $('rRad').textContent = fmt(R*1000,0)+' mm';
+    }
+    var v = $('verdict');
+    if(V < vMin){
+      v.textContent = '⚠️ Velocity is below '+fmt(vMin,1)+(imp?' ft/s':' m/s')+' — flow may not be self-cleansing and sediment can settle. Consider a steeper slope or smaller pipe.';
+      v.style.color = '#854f0b';
+    } else if(V > vMax){
+      v.textContent = '⚠️ Velocity exceeds '+fmt(vMax)+(imp?' ft/s':' m/s')+' — erosion risk at bends and outlets. Consider a flatter slope or larger pipe.';
+      v.style.color = '#854f0b';
+    } else {
+      v.textContent = '✓ Velocity is in the healthy self-cleansing band ('+fmt(vMin,1)+'–'+fmt(vMax)+(imp?' ft/s':' m/s')+').';
+      v.style.color = '#085041';
+    }
+  }
+  function setDash(){
+    ['rVel','rAlt','rArea','rRad'].forEach(function(id){ $(id).textContent='–'; });
+    $('mainOut').innerHTML = '– <small>enter pipe size, material and slope</small>';
+    $('verdict').textContent = 'Enter pipe size, material and slope.';
+    $('verdict').style.color = '';
+  }
+  F.dia.addEventListener('change', function(){
+    $('customDiaWrap').style.display = F.dia.value==='custom' ? '' : 'none';
+    if(F.dia.value!=='custom'){ setUnits(units); }
+    calc();
+  });
+  F.mat.addEventListener('change', function(){
+    $('customMatWrap').style.display = F.mat.value==='custom' ? '' : 'none';
+    calc();
+  });
+  Object.keys(F).forEach(function(k){ F[k].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "75e83c45a3934dc2b73e7e85c0a0120f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
