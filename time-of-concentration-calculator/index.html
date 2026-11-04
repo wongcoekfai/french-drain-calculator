@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico">
+<title>Time of Concentration Calculator (Kirpich) | DrainCalc</title>
+<meta name="description" content="Free time of concentration calculator using the Kirpich equation. Enter flow path length and elevation drop to get Tc in minutes for Rational Method storm design. No sign-up, instant results.">
+<meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rh92qWJRqgHoNxDhyYulN0ytVPWbeSl17NSdC9YY7rI" />
+<link rel="canonical" href="https://tools.slidevaulte.com/time-of-concentration-calculator/">
+<meta property="og:title" content="Time of Concentration Calculator (Kirpich)">
+<meta property="og:description" content="Free Kirpich equation calculator. Get time of concentration from flow path length and elevation drop, ready for Rational Method design. No sign-up.">
+<meta property="og:url" content="https://tools.slidevaulte.com/time-of-concentration-calculator/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Time of Concentration Calculator",
+  "url": "https://tools.slidevaulte.com/time-of-concentration-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Calculate time of concentration with the Kirpich equation from flow path length and elevation drop.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is time of concentration?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Time of concentration (Tc) is the time it takes water to travel from the hydraulically most distant point of a catchment to the outlet. It is the key timing input for the Rational Method: rainfall intensity is read for a storm duration equal to Tc, because the whole catchment contributes flow at that moment." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Kirpich equation?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Kirpich (1940) estimates Tc from channel length and slope: Tc = 0.0078 × L^0.77 × S^-0.385, with Tc in minutes, L in feet and S as slope in ft per ft. In SI units the coefficient is 0.0195 with L in meters. It was calibrated on small agricultural watersheds and works best for short overland and small-channel flow paths." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a shorter Tc mean a bigger flood?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Rainfall intensity increases as storm duration decreases. A steep, compact catchment has a short Tc, so the design storm duration is short and the matching intensity is high — peak flow Q = C × i × A grows. Flatter, longer catchments have long Tc values matched to gentler, longer storms." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a typical time of concentration?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Small impervious areas concentrate fast: a parking lot or roof catchment often has Tc of 5–10 minutes, a residential yard 10–20 minutes, and a several-acre gently sloped site 20–60 minutes. Many jurisdictions set a minimum design Tc of 5 minutes." }
+    },
+    {
+      "@type": "Question",
+      "name": "When should I not use Kirpich?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Kirpich assumes a single natural flow path and tends to underestimate Tc in paved urban catchments and overestimate it in very flat terrain. For urban design many agencies prefer the FAA method or the SCS lag method, and segmented Tc (sheet + shallow concentrated + channel flow) for mixed paths." }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#17242a; --muted:#5c6b73; --line:#dbe4e8; --bg:#f4f8f9;
+    --teal:#0f6e56; --teal-dk:#085041; --teal-bg:#e1f5ee;
+    --amber-bg:#faeeda; --amber:#854f0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-weight:700;font-size:19px;color:var(--teal-dk);text-decoration:none}
+  .logo span{color:var(--ink)}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+  nav a:hover{color:var(--teal)}
+  .hero{padding:44px 0 8px}
+  h1{font-size:30px;line-height:1.25;margin-bottom:10px}
+  .sub{color:var(--muted);font-size:17px;max-width:640px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin:26px 0}
+  .units{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px}
+  .units button{border:0;background:#fff;padding:8px 18px;font-size:14px;cursor:pointer;color:var(--muted)}
+  .units button.on{background:var(--teal);color:#fff;font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+  .inwrap{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .inwrap input,.inwrap select{flex:1;border:0;padding:11px 13px;font-size:16px;min-width:0;outline:none;background:#fff}
+  .inwrap input:focus,.inwrap select:focus{background:#fbfdfd}
+  .inwrap .u{background:#f1f5f6;color:var(--muted);font-size:13px;display:flex;align-items:center;padding:0 12px;border-left:1px solid var(--line)}
+  .res{background:var(--teal-bg);border:1px solid #9fe1cb;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .res h2{font-size:15px;color:var(--teal-dk);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+  .big{font-size:34px;font-weight:700;color:var(--teal-dk);line-height:1.2}
+  .big small{font-size:16px;font-weight:400;color:var(--teal)}
+  .rows{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:560px){.rows{grid-template-columns:1fr}}
+  .row{display:flex;justify-content:space-between;border-bottom:1px dashed #b7dccd;padding:6px 0;font-size:15px}
+  .row b{font-variant-numeric:tabular-nums}
+  .hint{color:var(--muted);font-size:13px;margin-top:14px}
+  h2.sec{font-size:22px;margin:38px 0 12px}
+  h3{font-size:17px;margin:22px 0 8px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0;padding:0 18px}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;font-size:15.5px}
+  details p{padding-bottom:14px;color:#33454d;font-size:15px}
+  .formula{background:#0d1f26;color:#cde8dd;border-radius:10px;padding:16px 20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;overflow-x:auto;margin:12px 0;line-height:1.8}
+  .alert{background:var(--amber-bg);border:1px solid #f0d9ad;border-radius:10px;padding:14px 18px;font-size:14px;color:var(--amber);margin:18px 0}
+  .rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .rel a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+  .rel a:hover{border-color:var(--teal)}
+  .rel a small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+  footer nav{margin-bottom:10px}
+  .visual{background:#0d1f26;border-radius:10px;padding:10px 16px 0;margin:12px 0}
+  .visual svg{display:block;width:100%;height:auto}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="/">Drain<span>Calc</span></a>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Time of Concentration Calculator</h1>
+    <p class="sub">Enter the flow path length and elevation drop to get Tc with the Kirpich equation — the timing input your Rational Method design needs. Instant, no sign-up.</p>
+  </div>
+
+  <div class="card" id="calculator">
+    <div class="units" role="tablist">
+      <button id="uImp" class="on" onclick="setUnits('imp')">Feet</button>
+      <button id="uMet" onclick="setUnits('met')">Meters</button>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label for="len">Flow path length (most distant point → outlet)</label>
+        <div class="inwrap"><input id="len" type="number" min="0" step="any" value="500"><span class="u" id="uLen">ft</span></div>
+      </div>
+      <div>
+        <label for="drop">Elevation drop along the path</label>
+        <div class="inwrap"><input id="drop" type="number" min="0" step="any" value="10"><span class="u" id="uDrop">ft</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="res" id="results" aria-live="polite">
+    <h2>Time of concentration (Kirpich)</h2>
+    <div class="big" id="mainOut">– <small>Tc</small></div>
+    <div class="rows">
+      <div class="row"><span>Slope of flow path</span><b id="rSlope">–</b></div>
+      <div class="row"><span>Average flow velocity</span><b id="rVel">–</b></div>
+      <div class="row"><span>Tc in seconds</span><b id="rSec">–</b></div>
+      <div class="row"><span>Design storm duration</span><b id="rDur">–</b></div>
+    </div>
+    <p class="hint" id="verdict">Enter path length and elevation drop.</p>
+  </div>
+
+  <div class="visual" aria-hidden="true">
+    <svg viewBox="0 0 680 150" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30,40 L340,40 L650,120" fill="none" stroke="#2c4a52" stroke-width="12" stroke-linecap="round"/>
+      <path d="M60,30 Q300,26 360,34 Q520,52 640,112" fill="none" stroke="#3d8f7d" stroke-width="4"/>
+      <polygon points="650,120 628,110 632,124" fill="#3d8f7d"/>
+      <text x="40" y="24" fill="#7fa89b" font-size="12" font-family="sans-serif">hydraulically most distant point</text>
+      <text x="500" y="145" fill="#7fa89b" font-size="12" font-family="sans-serif">outlet</text>
+      <text x="360" y="70" fill="#7fa89b" font-size="12" font-family="sans-serif">water drops H over length L → Tc</text>
+    </svg>
+  </div>
+
+  <h2 class="sec" id="how">How this calculator works</h2>
+  <p>The Kirpich equation (1940) estimates time of concentration from just two numbers — path length and slope:</p>
+  <div class="formula" id="formulaImp">
+US units:
+Tc (min) = 0.0078 × L^0.77 × S^-0.385
+L = flow path length (ft)
+S = slope = elevation drop ÷ length (ft/ft)
+average velocity = L ÷ Tc
+  </div>
+  <div class="formula" id="formulaMet" style="display:none">
+SI units:
+Tc (min) = 0.0195 × L^0.77 × S^-0.385
+L = flow path length (m)
+S = slope = elevation drop ÷ length (m/m)
+average velocity = L ÷ Tc
+  </div>
+
+  <h3>Using Tc in the Rational Method</h3>
+  <ol>
+    <li>Measure the longest (hydraulically most distant) flow path to your outlet — overland, down a swale, through a channel.</li>
+    <li>Get Tc here.</li>
+    <li>Read rainfall intensity <b>i</b> from your local IDF curve at duration = Tc.</li>
+    <li>Compute peak flow <b>Q = C × i × A</b> — the <a href="/catch-basin-calculator/">catch basin calculator</a> walks through that step.</li>
+  </ol>
+
+  <div class="alert">⚠️ Kirpich assumes a single natural flow path and was calibrated on small rural watersheds. It can underestimate Tc on paved urban sites and overestimate it in very flat terrain — check which method your local stormwater manual prescribes.</div>
+
+  <h3>Typical Tc ranges</h3>
+  <ul>
+    <li><b>Parking lot / roof catchment:</b> 5–10 minutes — impervious surfaces shed water fast.</li>
+    <li><b>Residential yard or small swale:</b> 10–20 minutes.</li>
+    <li><b>Multi-acre gentle site:</b> 20–60 minutes.</li>
+    <li><b>Most jurisdictions set a minimum design Tc of 5 minutes</b> — shorter results are clipped to 5.</li>
+  </ul>
+
+  <h2 class="sec" id="faq">Frequently asked questions</h2>
+  <details open>
+    <summary>What is time of concentration?</summary>
+    <p>Time of concentration (Tc) is the time it takes water to travel from the hydraulically most distant point of a catchment to the outlet. It is the key timing input for the Rational Method: rainfall intensity is read for a storm duration equal to Tc, because the whole catchment contributes flow at that moment.</p>
+  </details>
+  <details>
+    <summary>What is the Kirpich equation?</summary>
+    <p>Kirpich (1940) estimates Tc from channel length and slope: Tc = 0.0078 × L^0.77 × S^-0.385, with Tc in minutes, L in feet and S as slope in ft per ft. In SI units the coefficient is 0.0195 with L in meters. It was calibrated on small agricultural watersheds and works best for short overland and small-channel flow paths.</p>
+  </details>
+  <details>
+    <summary>Why does a shorter Tc mean a bigger flood?</summary>
+    <p>Rainfall intensity increases as storm duration decreases. A steep, compact catchment has a short Tc, so the design storm duration is short and the matching intensity is high — peak flow Q = C × i × A grows. Flatter, longer catchments have long Tc values matched to gentler, longer storms.</p>
+  </details>
+  <details>
+    <summary>What is a typical time of concentration?</summary>
+    <p>Small impervious areas concentrate fast: a parking lot or roof catchment often has Tc of 5–10 minutes, a residential yard 10–20 minutes, and a several-acre gently sloped site 20–60 minutes. Many jurisdictions set a minimum design Tc of 5 minutes.</p>
+  </details>
+  <details>
+    <summary>When should I not use Kirpich?</summary>
+    <p>Kirpich assumes a single natural flow path and tends to underestimate Tc in paved urban catchments and overestimate it in very flat terrain. For urban design many agencies prefer the FAA method or the SCS lag method, and segmented Tc (sheet + shallow concentrated + channel flow) for mixed paths.</p>
+  </details>
+
+  <h2 class="sec">Related calculators</h2>
+  <div class="rel">
+    <a href="/catch-basin-calculator/">Catch Basin Calculator<small>Rational Method Q = C × i × A</small></a>
+    <a href="/manning-pipe-flow-calculator/">Manning Pipe Flow Calculator<small>Pipe capacity &amp; velocity</small></a>
+    <a href="/pipe-slope-calculator/">Pipe Slope Calculator<small>Drop, grade and fall per foot</small></a>
+    <a href="/">French Drain Calculator<small>Gravel, pipe &amp; fabric by trench size</small></a>
+    <a href="/gravel-calculator/">Gravel Calculator<small>Tons &amp; yards by area and depth</small></a>
+    <a href="/dry-well-calculator/">Dry Well Sizing Calculator<small>Volume for roof runoff</small></a>
+    <a href="/downspout-drainage-calculator/">Downspout Drainage Calculator<small>Roof runoff &amp; downspout sizing</small></a>
+    <a href="/yard-grading-calculator/">Yard Grading Calculator<small>Fill dirt for regrading</small></a>
+    <a href="/mulch-calculator/">Mulch Calculator<small>Bags, yards and cost compared</small></a>
+  </div>
+
+  <footer>
+    <nav><a href="#calculator">Calculator</a> · <a href="#how">How It Works</a> · <a href="#faq">FAQ</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></nav>
+    <p>DrainCalc provides free drainage and landscaping calculators for homeowners and contractors. Results are estimates for planning purposes only — always verify with your supplier and local codes before you dig.</p>
+    <p>© 2026 DrainCalc · Last updated November 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var units = 'imp';
+  var $ = function(id){ return document.getElementById(id); };
+  var F = { len:$('len'), drop:$('drop') };
+  var fmt = function(n, d){ return n.toLocaleString('en-US',{maximumFractionDigits:d==null?2:d}); };
+
+  window.setUnits = function(u){
+    units = u;
+    $('uImp').classList.toggle('on', u==='imp');
+    $('uMet').classList.toggle('on', u==='met');
+    var imp = u==='imp';
+    $('uLen').textContent = imp?'ft':'m';
+    $('uDrop').textContent = imp?'ft':'m';
+    $('formulaImp').style.display = imp?'block':'none';
+    $('formulaMet').style.display = imp?'none':'block';
+    if(imp){ F.len.value=500; F.drop.value=10; }
+    else { F.len.value=150; F.drop.value=3; }
+    calc();
+  };
+
+  function calc(){
+    var L=parseFloat(F.len.value)||0, H=parseFloat(F.drop.value)||0;
+    if(L<=0||H<=0||H>=L){ setDash(); return; }
+    var imp = units==='imp';
+    var S = H/L;
+    var Tc = (imp ? 0.0078 : 0.0195) * Math.pow(L,0.77) * Math.pow(S,-0.385);
+    var vel = L/(Tc*60); // length units per second
+    var dur = Math.max(5, Math.round(Tc));
+    var m = Math.floor(Tc), s = Math.round((Tc-m)*60);
+    $('mainOut').innerHTML = fmt(Tc,1)+' <small>minutes ('+(m?m+' min ':'')+s+' s)</small>';
+    $('rSlope').textContent = fmt(S*100)+' %';
+    $('rVel').textContent = fmt(vel*60,0)+' '+(imp?'ft/min':'m/min');
+    $('rSec').textContent = fmt(Tc*60,0)+' s';
+    $('rDur').textContent = dur+' min'+(Tc<5?' (minimum applied)':'');
+    var v = $('verdict');
+    if(Tc < 5){
+      v.textContent = 'Very fast catchment — most design manuals clip Tc to a 5-minute minimum for IDF intensity lookup.';
+      v.style.color = '#854f0b';
+    } else if(Tc > 60){
+      v.textContent = 'Long Tc — check whether a segmented method (sheet + channel flow) is required by your local manual for paths this long.';
+      v.style.color = '#854f0b';
+    } else {
+      v.textContent = '✓ Typical range. Read rainfall intensity from your local IDF curve at duration = '+dur+' min, then apply Q = C × i × A.';
+      v.style.color = '#085041';
+    }
+  }
+  function setDash(){
+    ['rSlope','rVel','rSec','rDur'].forEach(function(id){ $(id).textContent='–'; });
+    $('mainOut').innerHTML = '– <small>enter path length and drop</small>';
+    $('verdict').textContent = 'Enter path length and elevation drop.';
+    $('verdict').style.color = '';
+  }
+  Object.keys(F).forEach(function(k){ F[k].addEventListener('input', calc); });
+  calc();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "75e83c45a3934dc2b73e7e85c0a0120f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
