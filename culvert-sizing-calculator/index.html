@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6730005742175239"
+     crossorigin="anonymous"></script>
+<title>Culvert Sizing Calculator – Pipe Diameter from Runoff | DrainCalc</title>
+<meta name="description" content="Free culvert sizing calculator. Size a round culvert from drainage area, runoff coefficient and rainfall intensity using the Rational Method and Manning's equation. Instant results, no sign-up.">
+<meta name="robots" content="index, follow">
+<meta name="google-site-verification" content="rh92qWJRqgHoNxDhyYulN0ytVPWbeSl17NSdC9YY7rI" />
+<link rel="canonical" href="https://tools.slidevaulte.com/culvert-sizing-calculator/">
+<meta property="og:title" content="Culvert Sizing Calculator – Pipe Diameter from Runoff">
+<meta property="og:description" content="Size a round culvert with the Rational Method and Manning's equation. Enter drainage area, rainfall intensity and slope for an instant standard pipe size.">
+<meta property="og:url" content="https://tools.slidevaulte.com/culvert-sizing-calculator/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Culvert Sizing Calculator",
+  "url": "https://tools.slidevaulte.com/culvert-sizing-calculator/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Calculate peak runoff with the Rational Method and size a circular culvert using Manning's equation for full-pipe flow.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What size culvert do I need?",
+      "acceptedAnswer": { "@type": "Answer", "text": "First estimate peak flow with the Rational Method (Q = C × i × A), then use Manning's equation to find the inside diameter whose full-flow capacity exceeds that flow with a safety margin, and round up to a standard pipe size. For example, 5 acres with C = 0.35 and a 3 in/hr storm gives 5.29 cfs, which needs about 19 in inside diameter at a 1% slope — a 24 in (600 mm) culvert is the standard choice." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the Rational Method formula?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Q = C × i × A, where C is the runoff coefficient, i is rainfall intensity for a storm duration equal to the time of concentration, and A is the drainage area. In US units Q (cfs) = 1.008 × C × i (in/hr) × A (acres); the 1.008 factor is often rounded to 1. In SI units Q (m³/s) = C × i (mm/hr) × A (hectares) ÷ 360. It is intended for small drainage areas, typically under 20 acres." }
+    },
+    {
+      "@type": "Question",
+      "name": "What slope should a culvert have?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Start at 1% (1 ft of fall per 100 ft) and keep the pipe close to the natural channel grade. Below roughly 0.5% sediment tends to settle in the barrel; above 2–3% outlet velocity rises and you may need riprap or an energy dissipator. Always check the fall with a pipe slope calculation before you set the invert." }
+    },
+    {
+      "@type": "Question",
+      "name": "What Manning's n should I use for a culvert?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Common values are 0.024 for corrugated metal pipe (CMP), 0.027 for older or larger corrugated steel, 0.013 for concrete pipe and 0.012 for smooth HDPE. Rougher, older or sediment-coated pipe has a higher n and less capacity. This calculator lets you choose the material, so you can compare them directly." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this a final culvert design?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. This is a planning-level barrel size based on open-channel full-flow capacity. A real design also checks inlet control and outlet control headwater, tailwater, barrel length, inlet geometry, debris blockage, cover depth and local drainage criteria, normally following FHWA HDS-5. Have a licensed engineer sign off on anything under a roadway or near a structure." }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#17242a; --muted:#5c6b73; --line:#dbe4e8; --bg:#f4f8f9;
+    --teal:#0f6e56; --teal-dk:#085041; --teal-bg:#e1f5ee;
+    --amber-bg:#faeeda; --amber:#854f0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-weight:700;font-size:19px;color:var(--teal-dk);text-decoration:none}
+  .logo span{color:var(--ink)}
+  nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:18px}
+  nav a:hover{color:var(--teal)}
+  .hero{padding:44px 0 8px}
+  h1{font-size:30px;line-height:1.25;margin-bottom:10px}
+  .sub{color:var(--muted);font-size:17px;max-width:660px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px;margin:26px 0}
+  .units{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px}
+  .units button{border:0;background:#fff;padding:8px 18px;font-size:14px;cursor:pointer;color:var(--muted)}
+  .units button.on{background:var(--teal);color:#fff;font-weight:600}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+  .inwrap{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  .inwrap input,.inwrap select{flex:1;border:0;padding:11px 13px;font-size:16px;min-width:0;outline:none;background:#fff}
+  .inwrap input:focus,.inwrap select:focus{background:#fbfdfd}
+  .inwrap .u{background:#f1f5f6;color:var(--muted);font-size:13px;display:flex;align-items:center;padding:0 12px;border-left:1px solid var(--line)}
+  .res{background:var(--teal-bg);border:1px solid #9fe1cb;border-radius:14px;padding:24px 26px;margin:26px 0}
+  .res h2{font-size:15px;color:var(--teal-dk);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em}
+  .big{font-size:34px;font-weight:700;color:var(--teal-dk);line-height:1.2}
+  .big small{font-size:16px;font-weight:400;color:var(--teal)}
+  .rows{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;margin-top:16px}
+  @media(max-width:560px){.rows{grid-template-columns:1fr}}
+  .row{display:flex;justify-content:space-between;border-bottom:1px dashed #b7dccd;padding:6px 0;font-size:15px}
+  .row b{font-variant-numeric:tabular-nums}
+  .hint{color:var(--muted);font-size:13px;margin-top:14px}
+  h2.sec{font-size:22px;margin:38px 0 12px}
+  h3{font-size:17px;margin:22px 0 8px}
+  p{margin:8px 0}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:5px 0}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:10px;overflow:hidden;margin:12px 0;font-size:14px}
+  th{background:#eef4f6;text-align:left;padding:9px 12px;font-size:13px;color:var(--muted)}
+  td{padding:9px 12px;border-top:1px solid var(--line)}
+  details{border:1px solid var(--line);border-radius:10px;background:#fff;margin:10px 0;padding:0 18px}
+  details summary{cursor:pointer;font-weight:600;padding:14px 0;font-size:15.5px}
+  details p{padding-bottom:14px;color:#33454d;font-size:15px}
+  .formula{background:#0d1f26;color:#cde8dd;border-radius:10px;padding:16px 20px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;overflow-x:auto;margin:12px 0;line-height:1.8}
+  .alert{background:var(--amber-bg);border:1px solid #f0d9ad;border-radius:10px;padding:14px 18px;font-size:14px;color:var(--amber);margin:18px 0}
+  .tip{background:var(--teal-bg);border:1px solid #9fe1cb;border-radius:10px;padding:12px 16px;font-size:14.5px;margin:12px 0}
+  .rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:14px 0}
+  .rel a{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;text-decoration:none;color:var(--ink);font-weight:600;font-size:14.5px}
+  .rel a:hover{border-color:var(--teal)}
+  .rel a small{display:block;color:var(--muted);font-weight:400;margin-top:3px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+  footer nav{margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="/">Drain<span>Calc</span></a>
+    <nav>
+      <a href="#calculator">Calculator</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Culvert Sizing Calculator</h1>
+    <p class="sub">Estimate peak runoff from your drainage area, then size a round culvert with Manning's equation. Get a standard pipe diameter in inches or millimeters — instantly, no sign-up.</p>
+  </div>
+
+  <div class="card" id="calculator">
+    <div class="units" role="tablist">
+      <button id="uImp" class="on" onclick="setUnits('us')">US Units</button>
+      <button id="uMet" onclick="setUnits('si')">Metric</button>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label for="area">Drainage area</label>
+        <div class="inwrap"><input id="area" type="number" min="0" step="any" value="5"><span class="u" id="uArea">acres</span></div>
+      </div>
+      <div>
+        <label for="coef">Runoff coefficient (C)</label>
+        <div class="inwrap">
+          <select id="coef">
+            <option value="0.15">Lawn, sandy soil, flat (0.15)</option>
+            <option value="0.25">Suburban, light soil (0.25)</option>
+            <option value="0.35" selected>Suburban residential (0.35)</option>
+            <option value="0.45">Gravel / compacted soil (0.45)</option>
+            <option value="0.65">Dense urban / clay (0.65)</option>
+            <option value="0.90">Roof or pavement (0.90)</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="inten">Rainfall intensity (i)</label>
+        <div class="inwrap"><input id="inten" type="number" min="0" step="any" value="3"><span class="u" id="uInt">in/hr</span></div>
+      </div>
+      <div>
+        <label for="slope">Culvert slope (S)</label>
+        <div class="inwrap"><input id="slope" type="number" min="0" step="any" value="1"><span class="u">%</span></div>
+      </div>
+      <div>
+        <label for="mat">Pipe material (Manning n)</label>
+        <div class="inwrap">
+          <select id="mat">
+            <option value="0.024" selected>Corrugated metal (CMP) · 0.024</option>
+            <option value="0.027">Corrugated steel, older · 0.027</option>
+            <option value="0.013">Concrete pipe · 0.013</option>
+            <option value="0.012">Smooth HDPE · 0.012</option>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="util">Max capacity use</label>
+        <div class="inwrap">
+          <select id="util">
+            <option value="0.70">70% (conservative)</option>
+            <option value="0.80" selected>80% (recommended)</option>
+            <option value="0.90">90% (tight)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="res" id="results" aria-live="polite">
+    <h2>Recommended culvert</h2>
+    <div class="big" id="mainOut">– <small>standard pipe size</small></div>
+    <div class="rows">
+      <div class="row"><span>Design flow (Q)</span><b id="rQ">–</b></div>
+      <div class="row"><span>Required full-flow capacity</span><b id="rReq">–</b></div>
+      <div class="row"><span>Minimum inside diameter</span><b id="rMin">–</b></div>
+      <div class="row"><span>Selected pipe capacity</span><b id="rCap">–</b></div>
+      <div class="row"><span>Capacity used</span><b id="rUse">–</b></div>
+      <div class="row"><span>Full-flow velocity</span><b id="rVel">–</b></div>
+    </div>
+    <div class="tip" id="verdict" style="font-weight:600"></div>
+    <p class="hint">Rainfall intensity should come from a local IDF curve (for example NOAA Atlas 14 in the US) for a storm duration equal to the time of concentration, not an arbitrary hourly total.</p>
+  </div>
+
+  <h2 class="sec" id="how">How this calculator works</h2>
+  <p>There are two steps: estimate the peak flow with the <b>Rational Method</b>, then find the pipe diameter whose full-flow capacity (by <b>Manning's equation</b>) carries that flow with a safety margin. The result is rounded up to a standard culvert size.</p>
+
+  <div class="formula" id="formulaUS">
+Q        = 1.008 × C × i × A              [cfs; A in acres, i in in/hr]
+Q_full   = Q ÷ max capacity use           [80% default → Q_full = 1.25 Q]
+Q_full   = (1.486/n) × A × R^(2/3) × √S   [Manning, full circular pipe]
+A        = πD²/4 ,  R = D/4 ,  S = slope (ft/ft)
+D_min    = [ Q_full × n × 4 × 4^(2/3) ÷ (1.486 × π × √S) ]^(3/8)
+  </div>
+  <div class="formula" id="formulaSI" style="display:none">
+Q        = C × i × A ÷ 360                [m³/s; A in hectares, i in mm/hr]
+Q_full   = Q ÷ max capacity use           [80% default → Q_full = 1.25 Q]
+Q_full   = (1/n) × A × R^(2/3) × √S       [Manning, full circular pipe]
+A        = πD²/4 ,  R = D/4 ,  S = slope (m/m)
+D_min    = [ Q_full × n × 4 × 4^(2/3) ÷ (π × √S) ]^(3/8)
+  </div>
+  <p>The 1.008 factor in US units converts acre-inches per hour to cubic feet per second (it is often rounded to 1.0). The metric form divides by 360 for the same reason, so both unit systems give the same answer.</p>
+
+  <div class="alert">⚠️ <b>Planning-level estimate only.</b> This sizes the barrel from open-channel full-flow capacity. A real culvert design must also check inlet control and outlet control headwater, tailwater, barrel length, inlet geometry, debris blockage, cover depth and local drainage criteria — normally following FHWA HDS-5. Anything under a roadway or beside a structure needs a licensed engineer.</div>
+
+  <h3>Worked example: 5-acre suburban lot</h3>
+  <p>Take a <b>5 acre</b> drainage area with <b>C = 0.35</b>, a <b>3 in/hr</b> design storm, a <b>1% slope</b> and corrugated metal pipe (<b>n = 0.024</b>):</p>
+  <ol>
+    <li>Peak flow: 1.008 × 0.35 × 3 × 5 = <b>5.29 cfs</b> (2,376 gpm, 0.150 m³/s).</li>
+    <li>With an 80% capacity limit, the pipe must carry at least <b>6.62 cfs</b> flowing full.</li>
+    <li>Manning's equation gives a minimum inside diameter of <b>19.05 in</b> (484 mm).</li>
+    <li>Round up to the next standard size: <b>24 in / 600 mm</b>. Its full-flow capacity is <b>12.25 cfs</b>, so the design storm uses only <b>43%</b> of capacity.</li>
+    <li>Full-flow velocity is <b>3.90 ft/s</b> — above the 2 ft/s sediment threshold and well below the 10 ft/s scour threshold.</li>
+  </ol>
+
+  <h3>Standard round culvert sizes</h3>
+  <p>Full-flow capacity at a <b>1% slope with n = 0.024</b> (CMP). Smoother pipe carries more; a steeper slope carries more as the square root of the grade.</p>
+  <table>
+    <tr><th>Nominal size</th><th>Area</th><th>Full-flow capacity</th><th>Full-flow velocity</th></tr>
+    <tr><td>18 in / 450 mm</td><td>1.77 ft²</td><td>5.69 cfs</td><td>3.22 ft/s</td></tr>
+    <tr><td>24 in / 600 mm</td><td>3.14 ft²</td><td>12.25 cfs</td><td>3.90 ft/s</td></tr>
+    <tr><td>30 in / 750 mm</td><td>4.91 ft²</td><td>22.22 cfs</td><td>4.53 ft/s</td></tr>
+    <tr><td>36 in / 900 mm</td><td>7.07 ft²</td><td>36.13 cfs</td><td>5.11 ft/s</td></tr>
+    <tr><td>42 in / 1050 mm</td><td>9.62 ft²</td><td>54.50 cfs</td><td>5.66 ft/s</td></tr>
+    <tr><td>48 in / 1200 mm</td><td>12.57 ft²</td><td>77.81 cfs</td><td>6.19 ft/s</td></tr>
+    <tr><td>54 in / 1350 mm</td><td>15.90 ft²</td><td>106.52 cfs</td><td>6.70 ft/s</td></tr>
+    <tr><td>60 in / 1500 mm</td><td>19.63 ft²</td><td>141.07 cfs</td><td>7.18 ft/s</td></tr>
+    <tr><td>72 in / 1800 mm</td><td>28.27 ft²</td><td>229.40 cfs</td><td>8.11 ft/s</td></tr>
+  </table>
+
+  <h3>How much the storm intensity matters</h3>
+  <p>Same 5 acres, C = 0.35, 1% slope, CMP, 80% capacity limit. Note that doubling the rainfall does <b>not</b> double the required diameter:</p>
+  <table>
+    <tr><th>Rainfall intensity</th><th>Peak flow</th><th>Minimum ID</th><th>Recommended size</th></tr>
+    <tr><td>1 in/hr</td><td>1.76 cfs</td><td>12.6 in</td><td>18 in / 450 mm</td></tr>
+    <tr><td>2 in/hr</td><td>3.53 cfs</td><td>16.4 in</td><td>18 in / 450 mm</td></tr>
+    <tr><td>3 in/hr</td><td>5.29 cfs</td><td>19.0 in</td><td>24 in / 600 mm</td></tr>
+    <tr><td>4 in/hr</td><td>7.06 cfs</td><td>21.2 in</td><td>24 in / 600 mm</td></tr>
+    <tr><td>6 in/hr</td><td>10.59 cfs</td><td>24.7 in</td><td>30 in / 750 mm</td></tr>
+  </table>
+  <p class="hint">This is why getting the design storm right matters more than over-sizing the pipe: use the intensity for a duration equal to your <a href="/time-of-concentration-calculator/">time of concentration</a>, not the daily rainfall total.</p>
+
+  <h3>Choosing the inputs</h3>
+  <ul>
+    <li><b>Runoff coefficient C</b> — roofs and pavement shed almost everything (0.70–0.95); lawns on sandy flat ground absorb most of it (0.10–0.20). Mixed suburban lots usually land near 0.30–0.40.</li>
+    <li><b>Rainfall intensity</b> — read from a local IDF curve for your design return period (often 10 or 25 years for a driveway culvert) at the storm duration equal to Tc.</li>
+    <li><b>Slope</b> — match the existing channel where possible; 0.5–2% is the usual working range.</li>
+    <li><b>Manning n</b> — rougher pipe means less capacity. Compare CMP with concrete or HDPE in the calculator before you buy.</li>
+    <li><b>Capacity limit</b> — 80% leaves room for sediment, debris and a slightly imperfect grade. Use 70% where blockage is likely.</li>
+    <li><b>Call before you dig.</b> In the US dial <b>811</b> to have buried utilities marked — it's free and it's the law.</li>
+  </ul>
+
+  <h2 class="sec" id="faq">Frequently asked questions</h2>
+  <details open>
+    <summary>What size culvert do I need?</summary>
+    <p>First estimate peak flow with the Rational Method (Q = C × i × A), then use Manning's equation to find the inside diameter whose full-flow capacity exceeds that flow with a safety margin, and round up to a standard pipe size. For example, 5 acres with C = 0.35 and a 3 in/hr storm gives 5.29 cfs, which needs about 19 in inside diameter at a 1% slope — a 24 in (600 mm) culvert is the standard choice.</p>
+  </details>
+  <details>
+    <summary>What is the Rational Method formula?</summary>
+    <p>Q = C × i × A, where C is the runoff coefficient, i is rainfall intensity for a storm duration equal to the time of concentration, and A is the drainage area. In US units Q (cfs) = 1.008 × C × i (in/hr) × A (acres); the 1.008 factor is often rounded to 1. In SI units Q (m³/s) = C × i (mm/hr) × A (hectares) ÷ 360. It is intended for small drainage areas, typically under 20 acres.</p>
+  </details>
+  <details>
+    <summary>What slope should a culvert have?</summary>
+    <p>Start at 1% (1 ft of fall per 100 ft) and keep the pipe close to the natural channel grade. Below roughly 0.5% sediment tends to settle in the barrel; above 2–3% outlet velocity rises and you may need riprap or an energy dissipator. Always check the fall with a <a href="/pipe-slope-calculator/">pipe slope calculation</a> before you set the invert.</p>
+  </details>
+  <details>
+    <summary>What Manning's n should I use for a culvert?</summary>
+    <p>Common values are 0.024 for corrugated metal pipe (CMP), 0.027 for older or larger corrugated steel, 0.013 for concrete pipe and 0.012 for smooth HDPE. Rougher, older or sediment-coated pipe has a higher n and less capacity. This calculator lets you choose the material, so you can compare them directly.</p>
+  </details>
+  <details>
+    <summary>Is this a final culvert design?</summary>
+    <p>No. This is a planning-level barrel size based on open-channel full-flow capacity. A real design also checks inlet control and outlet control headwater, tailwater, barrel length, inlet geometry, debris blockage, cover depth and local drainage criteria, normally following FHWA HDS-5. Have a licensed engineer sign off on anything under a roadway or near a structure.</p>
+  </details>
+
+  <h2 class="sec">Related calculators</h2>
+  <div class="rel">
+    <a href="/">French Drain Calculator<small>Gravel, pipe &amp; fabric by trench size</small></a>
+    <a href="/gravel-calculator/">Gravel Calculator<small>Tons, yards and bags by area</small></a>
+    <a href="/pipe-slope-calculator/">Pipe Slope Calculator<small>Grade, drop and fall per foot</small></a>
+    <a href="/dry-well-calculator/">Dry Well Sizing Calculator<small>Volume for roof runoff</small></a>
+    <a href="/catch-basin-calculator/">Catch Basin Calculator<small>Grate size and basin count</small></a>
+    <a href="/mulch-calculator/">Mulch Calculator<small>Bags, yards and cost compared</small></a>
+    <a href="/sump-pit-calculator/">Sump Pit Calculator<small>Storage, cycles and pump sizing</small></a>
+    <a href="/downspout-drainage-calculator/">Downspout Drainage Calculator<small>Roof runoff &amp; downspout sizing</small></a>
+    <a href="/yard-grading-calculator/">Yard Grading Calculator<small>Fill dirt for regrading</small></a>
+    <a href="/manning-pipe-flow-calculator/">Manning Pipe Flow Calculator<small>Pipe capacity &amp; velocity by size and slope</small></a>
+    <a href="/time-of-concentration-calculator/">Time of Concentration Calculator<small>Kirpich Tc for Rational Method</small></a>
+  </div>
+
+  <footer>
+    <nav><a href="#calculator">Calculator</a> · <a href="#how">How It Works</a> · <a href="#faq">FAQ</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></nav>
+    <p>DrainCalc provides free drainage and landscaping calculators for homeowners and contractors. Results are estimates for planning purposes only — always verify with your supplier, local codes and a licensed engineer before you dig.</p>
+    <p>© 2026 DrainCalc · Last updated November 2026</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var units = 'us';
+  var $ = function(id){ return document.getElementById(id); };
+  var F = { area:$('area'), coef:$('coef'), inten:$('inten'), slope:$('slope'), mat:$('mat'), util:$('util') };
+  var fmt = function(n,d){ return n.toLocaleString('en-US',{maximumFractionDigits:d==null?2:d}); };
+  var STD = [
+    {inch:18,mm:450},{inch:24,mm:600},{inch:30,mm:750},{inch:36,mm:900},
+    {inch:42,mm:1050},{inch:48,mm:1200},{inch:54,mm:1350},{inch:60,mm:1500},{inch:72,mm:1800}
+  ];
+
+  window.setUnits = function(u){
+    units = u;
+    $('uImp').classList.toggle('on', u==='us');
+    $('uMet').classList.toggle('on', u==='si');
+    var us = u==='us';
+    $('uArea').textContent = us?'acres':'hectares';
+    $('uInt').textContent  = us?'in/hr':'mm/hr';
+    $('formulaUS').style.display = us?'block':'none';
+    $('formulaSI').style.display = us?'none':'block';
+    if(us){ F.area.value=5; F.inten.value=3; }
+    else  { F.area.value=2; F.inten.value=75; }
+    calc();
+  };
+
+  function calc(){
+    var A=parseFloat(F.area.value)||0, C=parseFloat(F.coef.value)||0,
+        i=parseFloat(F.inten.value)||0, S=parseFloat(F.slope.value)||0,
+        n=parseFloat(F.mat.value)||0.024, util=parseFloat(F.util.value)||0.8;
+    if(A<=0||C<=0||i<=0||S<=0){ setDash(); return; }
+
+    var us = units==='us';
+    var Q, Qreq, Dmin;
+    if(us){
+      Q = 1.0083333333*C*i*A;                       // cfs
+      Qreq = Q/util;
+      Dmin = Math.pow(Qreq*n*4*Math.pow(4,2/3)/(1.486*Math.PI*Math.sqrt(S/100)),3/8)*12;  // inches
+    } else {
+      Q = C*i*A/360;                                 // m3/s
+      Qreq = Q/util;
+      Dmin = Math.pow(Qreq*n*4*Math.pow(4,2/3)/(Math.PI*Math.sqrt(S/100)),3/8)*1000;      // mm
+    }
+    var dInches = us ? Dmin : Dmin/25.4;
+    var pick = null;
+    for(var k=0;k<STD.length;k++){ if(STD[k].inch >= dInches){ pick=STD[k]; break; } }
+    if(!pick) pick = STD[STD.length-1];
+
+    var D = us ? pick.inch/12 : pick.mm/1000;
+    var area = Math.PI*D*D/4;
+    var Qfull = (us ? 1.486/n : 1/n)*area*Math.pow(D/4,2/3)*Math.sqrt(S/100);
+    var V = Qfull/area;
+
+    $('mainOut').innerHTML = us
+      ? fmt(pick.inch,0)+' in <small>culvert ('+fmt(pick.mm,0)+' mm nominal)</small>'
+      : fmt(pick.mm,0)+' mm <small>culvert ('+fmt(pick.inch,0)+' in nominal)</small>';
+    $('rQ').textContent   = us ? fmt(Q)+' cfs ('+fmt(Q*448.831,0)+' gpm)' : fmt(Q,4)+' m³/s';
+    $('rReq').textContent = us ? fmt(Qreq)+' cfs' : fmt(Qreq,4)+' m³/s';
+    $('rMin').textContent = us ? fmt(Dmin)+' in ('+fmt(Dmin*25.4,0)+' mm)' : fmt(Dmin,0)+' mm ('+fmt(Dmin/25.4,1)+' in)';
+    $('rCap').textContent = us ? fmt(Qfull)+' cfs' : fmt(Qfull,3)+' m³/s';
+    $('rUse').textContent = fmt(Q/Qfull*100,1)+'%';
+    $('rVel').textContent = us ? fmt(V)+' ft/s' : fmt(V)+' m/s';
+
+    var vFt = us ? V : V/0.3048;
+    var msg, good;
+    if(vFt < 2){
+      msg = 'Check: full-flow velocity below 2 ft/s — sediment may settle in the barrel. Consider a steeper grade or a smaller pipe.';
+      good = false;
+    } else if(vFt > 10){
+      msg = 'Check: full-flow velocity above 10 ft/s — add riprap or an energy dissipator at the outlet.';
+      good = false;
+    } else {
+      msg = 'OK: full-flow velocity is in the healthy 2–10 ft/s range (low sediment risk, manageable outlet velocity).';
+      good = true;
+    }
+    var box = $('verdict');
+    box.textContent = msg + (pick === STD[STD.length-1] && dInches > pick.inch ? ' Largest listed size reached — verify with an engineer.' : '');
+    box.style.background = good ? '#e1f5ee' : '#faeeda';
+    box.style.borderColor = good ? '#9fe1cb' : '#f0d9ad';
+    box.style.color = good ? '#0b5d49' : '#854f0b';
+  }
+  function setDash(){
+    ['rQ','rReq','rMin','rCap','rUse','rVel'].forEach(function(id){ $(id).textContent='–'; });
+    $('mainOut').innerHTML = '– <small>enter drainage area and storm data</small>';
+    $('verdict').textContent = '';
+  }
+  Object.keys(F).forEach(function(k){
+    F[k].addEventListener('input', calc);
+    F[k].addEventListener('change', calc);
+  });
+  calc();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "75e83c45a3934dc2b73e7e85c0a0120f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
