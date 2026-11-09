@@ -299,12 +299,12 @@ cycles/hour   = 60 ÷ (run time + refill time)
     $('mainOut').innerHTML = mainHtml;
     $('rRun').textContent = fmt(run,1)+' min';
     $('rRef').textContent = fmt(ref,1)+' min';
-    $('rCyc').textContent = fmt(cyc,1)+' /hour';
+    $('rCyc').textContent = fmt(cyc,1)+' per hour';
     var v = $('verdict');
     v.className = 'verdict '+(verdictOk?'v-ok':'v-bad');
     v.textContent = verdictOk
       ? '✓ Healthy cycle rate — this pit and pump combination will last.'
-      : '✗ Short cycling ('+fmt(cyc,1)+'/hr). Widen the float range, deepen the pit, or upsize the pump.';
+      : '✗ Short cycling ('+fmt(cyc,1)+' per hr). Widen the float range, deepen the pit, or upsize the pump.';
   }
   function setPumpFail(imp){
     ['rGpi','rRun','rRef','rCyc'].forEach(function(id){ $(id).textContent='–'; });
