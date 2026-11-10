@@ -129,6 +129,7 @@
       <a href="#calculator">Calculator</a>
       <a href="#how">How It Works</a>
       <a href="#faq">FAQ</a>
+      <a href="#tools">All Tools</a>
     </nav>
   </div>
 </header>
@@ -210,6 +211,8 @@
     <div class="tip" id="verdict" style="font-weight:600"></div>
     <p class="hint">Rainfall intensity should come from a local IDF curve (for example NOAA Atlas 14 in the US) for a storm duration equal to the time of concentration, not an arbitrary hourly total.</p>
   </div>
+
+  <div class="nexttools" style="margin:14px 0 0;padding:12px 14px;background:var(--teal-bg);border:1px solid var(--line);border-radius:10px;font-size:14.5px"><b>Next:</b> <a href="/manning-pipe-flow-calculator/" style="color:var(--teal-dk)">Manning Pipe Flow Calculator</a> · <a href="/time-of-concentration-calculator/" style="color:var(--teal-dk)">Time of Concentration Calculator</a> · <a href="/catch-basin-calculator/" style="color:var(--teal-dk)">Catch Basin Calculator</a></div>
 
   <h2 class="sec" id="how">How this calculator works</h2>
   <p>There are two steps: estimate the peak flow with the <b>Rational Method</b>, then find the pipe diameter whose full-flow capacity (by <b>Manning's equation</b>) carries that flow with a safety margin. The result is rounded up to a standard culvert size.</p>
@@ -301,7 +304,7 @@ D_min    = [ Q_full × n × 4 × 4^(2/3) ÷ (π × √S) ]^(3/8)
     <p>No. This is a planning-level barrel size based on open-channel full-flow capacity. A real design also checks inlet control and outlet control headwater, tailwater, barrel length, inlet geometry, debris blockage, cover depth and local drainage criteria, normally following FHWA HDS-5. Have a licensed engineer sign off on anything under a roadway or near a structure.</p>
   </details>
 
-  <h2 class="sec">Related calculators</h2>
+  <h2 class="sec" id="tools">Related calculators</h2>
   <div class="rel">
     <a href="/">French Drain Calculator<small>Gravel, pipe &amp; fabric by trench size</small></a>
     <a href="/gravel-calculator/">Gravel Calculator<small>Tons, yards and bags by area</small></a>
